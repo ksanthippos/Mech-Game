@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\HM\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\HM\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_Tank Game.1127062547.00" t="ExcludeRecursive" />
+    <e p="E:\Unity\Unity-kurssi\Tank Game" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="AI" t="Include">
+            <e p="AIControls.cs" t="Include" />
+          </e>
+          <e p="Camera" t="Include">
+            <e p="Follow.cs" t="Include" />
+          </e>
+          <e p="General" t="Include">
+            <e p="DestroyAfterParticles.cs" t="Include" />
+            <e p="GameController.cs" t="Include" />
+            <e p="Health.cs" t="Include" />
+            <e p="MainMenuController.cs" t="Include" />
+            <e p="UIController.cs" t="Include" />
+          </e>
+          <e p="Map" t="Include">
+            <e p="SpawnBlocks.cs" t="Include" />
+            <e p="Spawner.cs" t="Include" />
+          </e>
+          <e p="Tank" t="Include">
+            <e p="PlayerControls.cs" t="Include" />
+            <e p="Projectile.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Tank Game.sln" t="IncludeFlat" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
