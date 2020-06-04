@@ -271,7 +271,7 @@ MonoBehaviour:
   movementSpeed: 6
   turningSpeed: 4
   turretTurningSpeed: 3.5
-  shootingCooldown: 1
+  shootingCooldown: 0
   turret: {fileID: 1608560956613974391}
   muzzle: {fileID: 1608560956196015566}
   projectile: {fileID: 6167129411952547735, guid: b0c978b738549ed4fb5517c0941d4029,
