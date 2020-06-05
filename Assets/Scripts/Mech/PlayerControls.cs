@@ -58,13 +58,13 @@ public class PlayerControls : MonoBehaviour
             t -= Time.deltaTime;
         }
         
-        // set weapon
+        /*// set weapon --> HAS TO COME FROM GAMECONTROLLER!
         if (projectile.CompareTag("Proj_Bullet"))
             weapon = Weapon.Autocannon;
         else if (projectile.CompareTag("Proj_Missile"))
             weapon = Weapon.Missiles;
         else if (projectile.CompareTag("Proj_Beam"))
-            weapon = Weapon.Beam;
+            weapon = Weapon.Beam;*/
         
     }
     

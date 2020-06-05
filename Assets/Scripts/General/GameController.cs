@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     
     private GameObject player;
     private Health playerHealth;
+    private PlayerControls playerControls;
 
     public static GameController instance;
 
@@ -31,14 +32,16 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        // enemy spawns
         for (int i = 0; i < enemyStartingAmount; i++)
         {
             spawner.SpawnEnemy();
         }
         
+        // player spawn
         player = spawner.SpawnPlayer();
-        audioSource.Play();
-        
+        playerHealth = player.GetComponent<Health>();
+        playerControls = player.GetComponent<PlayerControls>();
         score = 0f;
         currentLives = lives;
         currentEnemyAmount = enemyStartingAmount;
@@ -47,14 +50,16 @@ public class GameController : MonoBehaviour
         ui.setScore(score);
         ui.setMechs(currentLives, lives);
         
-        playerHealth = player.GetComponent<Health>();
+        // spawning audio clip
+        audioSource.Play();
+        // adjust master volume
         AudioListener.volume = volumeLevel;
     }
     
     // Update is called once per frame
     void Update()
     {
-        if (player == null)
+        if (player == null)    // player has died
         { 
             if (currentLives > 0)
             {
@@ -62,9 +67,11 @@ public class GameController : MonoBehaviour
                 
                 if (Input.GetButtonDown("Restart"))
                 {
+                    // player respawn --> set defaults
                     ui.HideRespawnScreen();
                     player = spawner.SpawnPlayer();
                     playerHealth = player.GetComponent<Health>();
+                    playerControls = player.GetComponent<PlayerControls>();
                     audioSource.Play();
                     currentLives--;
                     ui.toggleAutoCannon();
@@ -73,21 +80,28 @@ public class GameController : MonoBehaviour
             }
             else 
             {
+                // game over 
                 ui.ShowEndScreen(score);
             }
         }
         
-        // weapon controls
+        // player controls
+        /*
+         * Shields ok, weapons has to be called from PlayerControls
+         */
         if (Input.GetButton("Autocannon"))
         {
+            playerControls.weapon = PlayerControls.Weapon.Autocannon;
             ui.toggleAutoCannon();
         }
         else if (Input.GetButton("Missiles"))
         {
+            playerControls.weapon = PlayerControls.Weapon.Missiles;
             ui.toggleMissiles();
         }
         else if (Input.GetButton("Energy beam"))
         {
+            playerControls.weapon = PlayerControls.Weapon.Beam;
             ui.toggleBeam();
         }
         else if (Input.GetButtonDown("Shields"))
