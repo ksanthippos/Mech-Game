@@ -240,9 +240,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 75
-  damageFlashTime: 0.1
+  maxPower: 100
+  maxHeat: 100
+  maxAmmo: 10
+  shieldsOn: 0
   explosion: {fileID: 95971568008635028, guid: bd8535852ed208c4e807a4a727261cc2, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
+  damageFlashTime: 0.1
 --- !u!114 &1987282871279552918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +273,7 @@ MonoBehaviour:
   muzzle: {fileID: 1987282871381635272}
   projectile: {fileID: 6167129411952547735, guid: b0c978b738549ed4fb5517c0941d4029,
     type: 3}
+  weapon: 1
 --- !u!82 &-98592167277339228
 AudioSource:
   m_ObjectHideFlags: 0

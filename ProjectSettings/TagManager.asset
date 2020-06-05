@@ -8,6 +8,15 @@ TagManager:
   - Enemy
   - Obstacle
   - Wall
+  - Enemy_Turret
+  - Enemy_SAM
+  - Enemy_CannonAPC
+  - Enemy_BeamAPC
+  - Enemy_Tank
+  - Proj_Bullet
+  - Proj_Missile
+  - Proj_Beam
+  - Enemy_MissileTank
   layers:
   - Default
   - TransparentFX

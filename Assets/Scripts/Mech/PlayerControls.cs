@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    
+    
+    public enum Weapon
+    {
+        Autocannon, Missiles, Beam
+    }
 
     // public variables can be accessed in Unity editor
     public float movementSpeed;
@@ -15,6 +21,7 @@ public class PlayerControls : MonoBehaviour
     public Transform turret;
     public Transform muzzle;
     public GameObject projectile;
+    public Weapon weapon;
     
     private Rigidbody rb;
     private Camera mainCamera;
@@ -30,7 +37,8 @@ public class PlayerControls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
         floorMask = LayerMask.GetMask("Floor");
-        
+        weapon = Weapon.Autocannon;    // default weapon
+        shootingCooldown = projectile.GetComponent<Projectile>().shootingCooldown; // cool down defined by projectile
     }
 
     // Update is called once per frame
@@ -38,17 +46,26 @@ public class PlayerControls : MonoBehaviour
     {
         if (t <= 0)    // allowed to shoot
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButton("Fire1"))
             {
                 GameObject proj = Instantiate(projectile, muzzle.position, muzzle.rotation);
                 proj.GetComponent<Projectile>().shooterTag = tag;
                 t = shootingCooldown;
-            }    
+            }
         }
         else
         {
             t -= Time.deltaTime;
         }
+        
+        // set weapon
+        if (projectile.CompareTag("Proj_Bullet"))
+            weapon = Weapon.Autocannon;
+        else if (projectile.CompareTag("Proj_Missile"))
+            weapon = Weapon.Missiles;
+        else if (projectile.CompareTag("Proj_Beam"))
+            weapon = Weapon.Beam;
+        
     }
     
     // FixedUpdate is called at fixed time intervals (default 50 times per sec)

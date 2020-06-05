@@ -7,6 +7,11 @@ using Random = UnityEngine.Random;
 public class AIControls : MonoBehaviour
 {
     
+    public enum Weapon
+    {
+        Autocannon, Missiles, Beam
+    }
+    
     public float movementSpeed;
     public float turningSpeed;
     public float turretTurningSpeed;
@@ -20,6 +25,7 @@ public class AIControls : MonoBehaviour
     public Transform turret;
     public Transform muzzle;
     public GameObject projectile;
+    public Weapon weapon;
     
     private float t;
     private float AIt;
@@ -49,6 +55,15 @@ public class AIControls : MonoBehaviour
         obstacleMask = LayerMask.GetMask("Obstacle");
         state = State.forward;
         nextState = State.forward;
+        shootingCooldown = projectile.GetComponent<Projectile>().shootingCooldown;
+        
+        // set weapon
+        if (projectile.CompareTag("Proj_Bullet"))
+            weapon = Weapon.Autocannon;
+        else if (projectile.CompareTag("Proj_Missile"))
+            weapon = Weapon.Missiles;
+        else if (projectile.CompareTag("Proj_Beam"))
+            weapon = Weapon.Beam;
     }
 
     

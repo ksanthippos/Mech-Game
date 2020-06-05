@@ -5,23 +5,40 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
 
+    
+    // HUD 
     public float maxHealth = 100;
-    public float damageFlashTime;
+    public float maxPower = 100;
+    public float maxHeat = 100;
+    public int maxAmmo = 10;
+    public bool shieldsOn;
+
     public GameObject explosion;
     public  Color damageColor = Color.red;
+    public float damageFlashTime;
     
     private float currentHealth;
+    private float currentPower;
+    private float currentHeat;
+    private float currentAmmo;
     private float t;
+    private bool dead = false;
     private Color originalColor;
     private Color originalEmissionColor;
     private MeshRenderer[] meshRenderers;
-    private bool dead = false;
+   
     private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         currentHealth = maxHealth;
+        currentHeat = 0;
+        currentPower = maxPower;
+        currentAmmo = maxAmmo;
+        shieldsOn = false;
+
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
         originalColor = meshRenderers[0].material.color;    // all children same color
         audioSource = GetComponent<AudioSource>();
@@ -47,7 +64,8 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0 && !dead)
         {
             dead = true;
-            if (gameObject.CompareTag("Enemy"))
+            if (gameObject.CompareTag("Enemy") || gameObject.CompareTag("Enemy_Tank") || gameObject.CompareTag("Enemy_Turret") || gameObject.CompareTag("Enemy_MissileTank") 
+                || gameObject.CompareTag("Enemy_SAM") || gameObject.CompareTag("Enemy_BeamAPC") || gameObject.CompareTag("Enemy_CannonAPC"))
             {
                 GameController.instance.EnemyDestroyed();   
             }

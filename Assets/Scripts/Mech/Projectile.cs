@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
+    
     public float speed;
     public float time;
     public float radius;
     public float damage;
-
+    public float shootingCooldown;
     public string shooterTag;
     public GameObject explosion;
 
-    private Rigidbody rb;
     private float t;
+    private Rigidbody rb;
     private AudioSource audioSource;
     
     // Start is called before the first frame update
@@ -62,6 +62,5 @@ public class Projectile : MonoBehaviour
         {
             Explode();    
         }
-        
     }
 }

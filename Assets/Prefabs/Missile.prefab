@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 7058057957364946106}
   - component: {fileID: 2582164557510520380}
   m_Layer: 0
-  m_Name: Projectile
-  m_TagString: Untagged
+  m_Name: Missile
+  m_TagString: Proj_Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   time: 1
   radius: 2
   damage: 25
+  shootingCooldown: 1.5
   shooterTag: 
   explosion: {fileID: 5006644853754915010, guid: 90de73ae85c4abb4c86d9d66727a12a5,
     type: 3}
