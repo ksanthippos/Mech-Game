@@ -274,7 +274,7 @@ MonoBehaviour:
   shootingCooldown: 0
   turret: {fileID: 1608560956613974391}
   muzzle: {fileID: 1608560956196015566}
-  projectile: {fileID: 6167129411952547735, guid: b0c978b738549ed4fb5517c0941d4029,
+  projectile: {fileID: 6167129411952547735, guid: aa5def24966d8664f9e69cdcd71b0463,
     type: 3}
 --- !u!114 &1608560956559658395
 MonoBehaviour:
