@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     public UIController ui;
     public AudioSource audioSource;
     public float volumeLevel;
-    
+
     private int currentLives;
     private int currentEnemyAmount;
     
@@ -42,12 +42,12 @@ public class GameController : MonoBehaviour
         score = 0f;
         currentLives = lives;
         currentEnemyAmount = enemyStartingAmount;
-        
+
         // set UI
         ui.setScore(score);
         ui.setMechs(currentLives, lives);
-        playerHealth = player.GetComponent<Health>();
         
+        playerHealth = player.GetComponent<Health>();
         AudioListener.volume = volumeLevel;
     }
     
@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
                 {
                     ui.HideRespawnScreen();
                     player = spawner.SpawnPlayer();
+                    playerHealth = player.GetComponent<Health>();
                     audioSource.Play();
                     currentLives--;
                     ui.toggleAutoCannon();
@@ -91,7 +92,7 @@ public class GameController : MonoBehaviour
         }
         else if (Input.GetButtonDown("Shields"))
         {
-            if (!playerHealth.shieldsOn && playerHealth.getCurrentPower() > 0)
+            if (!playerHealth.shieldsOn && playerHealth.GetCurrentPower() > 0)
             {
                 playerHealth.shieldsOn = true;
                 ui.shieldsOn();
@@ -102,8 +103,6 @@ public class GameController : MonoBehaviour
                 ui.shieldsOff();
             }
         }
-        
-        Debug.Log("Shield status: " + playerHealth.shieldsOn);
     }
 
     public void EnemyDestroyed()

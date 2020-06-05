@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
             Health health = colliders[i].GetComponent<Health>();
             if (health != null)
             {
-                health.reduceHealth(damage, tag);    // --> tag as a parameter
+                health.ReduceHealth(damage, tag);    // --> tag as a parameter
             }
         }
 

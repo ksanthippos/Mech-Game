@@ -11,7 +11,7 @@ public class Health : MonoBehaviour
     public float maxPower = 100;
     public float maxHeat = 100;
     public int maxAmmo = 10;
-    public bool shieldsOn;
+    public bool shieldsOn = false;
 
     public GameObject explosion;
     public  Color damageColor = Color.red;
@@ -47,16 +47,12 @@ public class Health : MonoBehaviour
             GameController.instance.SetPower(currentPower, maxPower);
             GameController.instance.SetShields(false);
         }
-        
-        // DEBUG
-        Debug.Log("Newe player power: " + currentPower);
-
     }
 
     
-    public void reduceHealth(float damage, string tag)
+    public void ReduceHealth(float damage, string tag)
     {
-        StartCoroutine(damageFlash());
+        StartCoroutine(DamageFlash());
 
         // missile hit & shields on --> no damage
         if (tag.Equals("Proj_Missile") && !shieldsOn)
@@ -104,7 +100,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    private IEnumerator damageFlash()
+    private IEnumerator DamageFlash()
     {
         t = damageFlashTime;
         while (t > 0)
@@ -127,7 +123,7 @@ public class Health : MonoBehaviour
         
     }
 
-    public float getCurrentPower()
+    public float GetCurrentPower()
     {
         return currentPower;
     }
