@@ -3,16 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
 
+    // HUD 
     public Text scoreText;
     public Text healthText;
-    public Text livesText;
+    public Text mechsText;
+    public Text heatText;
+    public Text powerText;
+    public Text ammoText;
+    public Text autoCannonText;
+    public Text missilesText;
+    public Text beamText;
+    public Text shieldsText;
+    
+    // end screen
     public Text EndScoreText;
     
+    // menus
     public GameObject pauseMenu;
     public GameObject respawnScreen;
     public GameObject endScreen;
@@ -26,14 +38,15 @@ public class UIController : MonoBehaviour
         }
     }
 
+    // HUD controls
     public void setScore(float score)
     {
         scoreText.text = "Score: " + score;
     }
 
-    public void setHealth(float current, float max)
+    public void setHealth(float current)
     {
-        healthText.text = "Health: " + current + "/" + max;
+        healthText.text = "Health: " + current + "%";
         if (current <= 25)
         {
             healthText.color = Color.red;
@@ -44,18 +57,67 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void setLives(int current, int max)
+    public void setMechs(int current, int max)
     {
-        livesText.text = "Lives: " + current + "/" + max;
+        mechsText.text = "Lives: " + current + "/" + max;
         if (current == 0)
         {
-            livesText.color = Color.red;
+            mechsText.color = Color.red;
         }
         else
         {
-            livesText.color = Color.white;
+            mechsText.color = Color.white;
         }
     }
+
+    public void setPower(float value)
+    {
+        powerText.text = "Power: " + value + "%";
+    }
+
+    public void setHeat(float value)
+    {
+        heatText.text = "Heat: " + value + "%";
+    }
+
+    public void setAmmo(int value)
+    {
+        ammoText.text = "Ammo: " + value;
+    }
+
+    public void toggleAutoCannon()
+    {
+        autoCannonText.color = Color.white;
+        missilesText.color = Color.gray;
+        beamText.color = Color.grey;
+    }
+
+    public void toggleMissiles()
+    {
+        autoCannonText.color = Color.gray;
+        missilesText.color = Color.white;
+        beamText.color = Color.grey;
+    }
+
+    public void toggleBeam()
+    {
+        autoCannonText.color = Color.gray;
+        missilesText.color = Color.gray;
+        beamText.color = Color.white;
+    }
+
+    public void shieldsOn()
+    {
+        shieldsText.text = "Shields: ON";
+        shieldsText.color = Color.green;
+    }
+    
+    public void shieldsOff()
+    {
+        shieldsText.text = "Shields: OFF";
+        shieldsText.color = Color.gray;
+    }
+    
 
     public void togglePause()
     {

@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
         
         // set UI
         ui.setScore(score);
-        ui.setLives(currentLives, lives);
+        ui.setMechs(currentLives, lives);
 
         AudioListener.volume = volumeLevel;
 
@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
                     player = spawner.SpawnPlayer();
                     audioSource.Play();
                     currentLives--;
-                    ui.setLives(currentLives, lives);
+                    ui.setMechs(currentLives, lives);
                 }
             }
             else 
@@ -73,6 +73,26 @@ public class GameController : MonoBehaviour
                 ui.ShowEndScreen(score);
             }
         }
+        
+        // weapon controls
+        if (Input.GetButton("Autocannon"))
+        {
+            ui.toggleAutoCannon();
+        }
+        else if (Input.GetButton("Missiles"))
+        {
+            ui.toggleMissiles();
+        }
+        else if (Input.GetButton("Energy beam"))
+        {
+            ui.toggleBeam();
+        }
+        else if (Input.GetButton("Shields"))
+        {
+            // check if player has shields on or off
+            ui.shieldsOn();
+        }
+            
     }
 
     public void EnemyDestroyed()
@@ -94,7 +114,7 @@ public class GameController : MonoBehaviour
         {
             current = 0f;
         }
-        ui.setHealth(current, max);
+        ui.setHealth(current);
     }
     
 
