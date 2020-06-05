@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +32,6 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         currentHealth = maxHealth;
         currentPower = maxPower;
         currentAmmo = maxAmmo;
@@ -45,11 +45,15 @@ public class Health : MonoBehaviour
         {
             GameController.instance.SetHealth(currentHealth, maxHealth);
             GameController.instance.SetPower(currentPower, maxPower);
-            shieldsOn = false;
+            GameController.instance.SetShields(false);
         }
+        
+        // DEBUG
+        Debug.Log("Newe player power: " + currentPower);
+
     }
 
-    // Update is called once per frame
+    
     public void reduceHealth(float damage, string tag)
     {
         StartCoroutine(damageFlash());
@@ -64,14 +68,12 @@ public class Health : MonoBehaviour
             if (shieldsOn)
             {
                 if (currentPower - damage > 0)
-                {
                     currentPower -= damage;
-                }
                 else
                 {
-                    shieldsOn = false;
                     currentPower = 0f;
-                }    
+                    shieldsOn = false;
+                }
             }
             else
                 currentHealth -= damage;
@@ -84,6 +86,8 @@ public class Health : MonoBehaviour
             GameController.instance.SetHealth(currentHealth, maxHealth);
             GameController.instance.SetPower(currentPower, maxPower);
             
+            if (currentPower <= 0)
+                GameController.instance.SetShields(false);
         }
         
         if (currentHealth <= 0 && !dead)
@@ -121,5 +125,10 @@ public class Health : MonoBehaviour
             r.material.SetColor("_EmissionColor", originalEmissionColor);
         }
         
+    }
+
+    public float getCurrentPower()
+    {
+        return currentPower;
     }
 }
