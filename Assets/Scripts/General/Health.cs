@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-
     
     // HUD 
     public float maxHealth = 100;
@@ -34,10 +33,9 @@ public class Health : MonoBehaviour
     {
         
         currentHealth = maxHealth;
-        currentHeat = 0;
         currentPower = maxPower;
         currentAmmo = maxAmmo;
-        shieldsOn = false;
+        currentHeat = 0f;
 
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
         originalColor = meshRenderers[0].material.color;    // all children same color
@@ -46,19 +44,46 @@ public class Health : MonoBehaviour
         if (gameObject.CompareTag("Player"))
         {
             GameController.instance.SetHealth(currentHealth, maxHealth);
+            GameController.instance.SetPower(currentPower, maxPower);
+            shieldsOn = false;
         }
     }
 
     // Update is called once per frame
-    public void reduceHealth(float damage)
+    public void reduceHealth(float damage, string tag)
     {
         StartCoroutine(damageFlash());
-        currentHealth -= damage;
+
+        // missile hit & shields on --> no damage
+        if (tag.Equals("Proj_Missile") && !shieldsOn)
+            currentHealth -= damage;    
+        
+        // energy beam hit & shields on --> drains power 
+        else if (tag.Equals("Proj_Beam") || tag.Equals("Proj_Bullet"))
+        {
+            if (shieldsOn)
+            {
+                if (currentPower - damage > 0)
+                {
+                    currentPower -= damage;
+                }
+                else
+                {
+                    shieldsOn = false;
+                    currentPower = 0f;
+                }    
+            }
+            else
+                currentHealth -= damage;
+        }
+        
         audioSource.Play();
 
         if (gameObject.CompareTag("Player"))
         {
             GameController.instance.SetHealth(currentHealth, maxHealth);
+            GameController.instance.SetPower(currentPower, maxPower);
+            
         }
         
         if (currentHealth <= 0 && !dead)
@@ -87,7 +112,6 @@ public class Health : MonoBehaviour
                 r.material.SetColor("_EmissionColor", damageColor);
                 yield return null;
             }
-            
         }
         
         // reset colors

@@ -17,7 +17,7 @@ public class PlayerControls : MonoBehaviour
     public float turningSpeed;
     public float turretTurningSpeed;
     public float shootingCooldown;
-    
+
     public Transform turret;
     public Transform muzzle;
     public GameObject projectile;
@@ -28,7 +28,7 @@ public class PlayerControls : MonoBehaviour
     private float maxRayDistance = 100f;
     private int floorMask;
     private float t;
-    
+
 
     // Start is called before the first frame update
     void Start()

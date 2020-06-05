@@ -27,6 +27,7 @@ public class Projectile : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.Play();
         rb.velocity = transform.forward * speed;
+        
     }
 
     // Update is called once per frame
@@ -48,7 +49,7 @@ public class Projectile : MonoBehaviour
             Health health = colliders[i].GetComponent<Health>();
             if (health != null)
             {
-                health.reduceHealth(damage);
+                health.reduceHealth(damage, tag);    // --> tag as a parameter
             }
         }
 

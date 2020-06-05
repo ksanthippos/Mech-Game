@@ -30,6 +30,12 @@ public class UIController : MonoBehaviour
     public GameObject endScreen;
 
 
+    private void Start()
+    {
+        toggleAutoCannon();
+        shieldsOff();
+    }
+
     private void Update()
     {
         if (Input.GetButtonDown("Cancel"))
