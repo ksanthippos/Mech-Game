@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
     
-    
     public enum Weapon
     {
         Autocannon, Missiles, Beam
@@ -17,11 +16,12 @@ public class PlayerControls : MonoBehaviour
     public float turningSpeed;
     public float turretTurningSpeed;
     public float shootingCooldown;
+    public int weaponIndex;
 
     public Transform turret;
     public Transform muzzle;
-    public GameObject projectile;
     public Weapon weapon;
+    public List<GameObject> projectiles = new List<GameObject>();
     
     private Rigidbody rb;
     private Camera mainCamera;
@@ -34,21 +34,24 @@ public class PlayerControls : MonoBehaviour
     void Start()
     {
         t = 0f;
+        weaponIndex = 0;
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
         floorMask = LayerMask.GetMask("Floor");
         weapon = Weapon.Autocannon;    // default weapon
-        shootingCooldown = projectile.GetComponent<Projectile>().shootingCooldown; // cool down defined by projectile
+        shootingCooldown = projectiles[weaponIndex].GetComponent<Projectile>().shootingCooldown;    // default first from the list -> autocannon
     }
 
     // Update is called once per frame
     private void Update()
     {
+        shootingCooldown = projectiles[weaponIndex].GetComponent<Projectile>().shootingCooldown;
+        
         if (t <= 0)    // allowed to shoot
         {
             if (Input.GetButton("Fire1"))
             {
-                GameObject proj = Instantiate(projectile, muzzle.position, muzzle.rotation);
+                GameObject proj = Instantiate(projectiles[weaponIndex], muzzle.position, muzzle.rotation);
                 proj.GetComponent<Projectile>().shooterTag = tag;
                 t = shootingCooldown;
             }
@@ -57,14 +60,6 @@ public class PlayerControls : MonoBehaviour
         {
             t -= Time.deltaTime;
         }
-        
-        /*// set weapon --> HAS TO COME FROM GAMECONTROLLER!
-        if (projectile.CompareTag("Proj_Bullet"))
-            weapon = Weapon.Autocannon;
-        else if (projectile.CompareTag("Proj_Missile"))
-            weapon = Weapon.Missiles;
-        else if (projectile.CompareTag("Proj_Beam"))
-            weapon = Weapon.Beam;*/
         
     }
     
