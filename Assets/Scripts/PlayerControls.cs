@@ -10,8 +10,7 @@ public class PlayerControls : MonoBehaviour
     {
         Autocannon, Missiles, Beam
     }
-
-    // public variables can be accessed in Unity editor
+    
     public float movementSpeed;
     public float turningSpeed;
     public float turretTurningSpeed;
@@ -47,8 +46,7 @@ public class PlayerControls : MonoBehaviour
         gameController = GameController.instance;
         
     }
-
-    // Update is called once per frame
+    
     private void Update()
     {
         // set current weapon
@@ -71,13 +69,10 @@ public class PlayerControls : MonoBehaviour
         {
             t -= Time.deltaTime;
         }
-        
     }
     
-    // FixedUpdate is called at fixed time intervals (default 50 times per sec)
     void FixedUpdate() // 
     {
-        
         Vector3 currentRotation = rb.transform.eulerAngles;
         rb.rotation = Quaternion.Euler(0f, currentRotation.y, 0f);    // tank is allowed to rotate only around y-axis  --> prevents from rolling over
         

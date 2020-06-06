@@ -6,15 +6,13 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     
-    // HUD 
     public float maxHealth = 100;
     public float maxPower = 100;
     public float maxHeat = 100;
-    public bool shieldsOn = false;
-
+    public bool shieldsOn;
+    public float damageFlashTime;
     public GameObject explosion;
     public  Color damageColor = Color.red;
-    public float damageFlashTime;
     
     private float t;
     private float currentHealth;
@@ -162,6 +160,7 @@ public class Health : MonoBehaviour
         }
     }
 
+    // getter & setters for power and heat
     public float GetCurrentPower()
     {
         return currentPower;
@@ -170,6 +169,16 @@ public class Health : MonoBehaviour
     public void ReducePower(float value)
     {
         currentPower -= value;
+    }
+
+    public float GetCurrentHeat()
+    {
+        return currentHeat;
+    }
+
+    public void AddHeat(float value)
+    {
+        currentHeat += value;
     }
 
     // checking for heat damage: different impact when shields on/off

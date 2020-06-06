@@ -52,7 +52,7 @@ public class UIController : MonoBehaviour
 
     public void setHealth(float value)
     {
-        healthText.text = "Health: " + value + "%";
+        healthText.text = "Health: " + (int) value + "%";
         if (value <= 25)
         {
             healthText.color = Color.red;
@@ -65,7 +65,7 @@ public class UIController : MonoBehaviour
     
     public void setPower(float value)
     {
-        powerText.text = "Power: " + value + "%";
+        powerText.text = "Power: " + (int) value + "%";
         if (value <= 25)
         {
             powerText.color = Color.red;
@@ -78,7 +78,7 @@ public class UIController : MonoBehaviour
 
     public void setHeat(float value)
     {
-        heatText.text = "Heat: " + value + "%";
+        heatText.text = "Heat: " + (int) value + "%";
         if (value >= 75)
         {
             heatText.color = Color.red;
