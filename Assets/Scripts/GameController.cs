@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
             {
                 ui.ShowRespawnScreen();
                 
-                if (Input.GetButtonDown("Restart"))
+                if (Input.GetButtonDown("Restart"))    // button space
                 {
                     // player respawn --> set defaults
                     ui.HideRespawnScreen();
@@ -86,28 +86,25 @@ public class GameController : MonoBehaviour
         }
         
         // player controls
-        /*
-         * Shields ok, weapons has to be called from PlayerControls
-         */
-        if (Input.GetButton("Autocannon"))
+        if (Input.GetButton("Autocannon"))    // button 1
         {
             playerControls.weapon = PlayerControls.Weapon.Autocannon;
             playerControls.weaponIndex = 0;
             ui.toggleAutoCannon();
         }
-        else if (Input.GetButton("Missiles"))
+        else if (Input.GetButton("Missiles"))    // button 2
         {
             playerControls.weapon = PlayerControls.Weapon.Missiles;
             playerControls.weaponIndex = 1;
             ui.toggleMissiles();
         }
-        else if (Input.GetButton("Energy beam"))
+        else if (Input.GetButton("Energy beam"))    // button 3
         {
             playerControls.weapon = PlayerControls.Weapon.Beam;
             playerControls.weaponIndex = 2;
             ui.toggleBeam();
         }
-        else if (Input.GetButtonDown("Shields"))
+        else if (Input.GetButtonDown("Shields"))    // button F
         {
             if (!playerHealth.shieldsOn && playerHealth.GetCurrentPower() > 0)
             {
@@ -165,7 +162,7 @@ public class GameController : MonoBehaviour
     public void SetShields(bool value)
     {
         playerHealth.shieldsOn = value;
-        if (value == true)
+        if (value)
             ui.shieldsOn();
         else
             ui.shieldsOff();
@@ -186,7 +183,7 @@ public class GameController : MonoBehaviour
                 }
                 break;
             case PlayerControls.Weapon.Beam:
-                if (playerHealth.GetCurrentPower() >= 20)
+                if (playerHealth.GetCurrentPower() >= 20 && !playerHealth.shieldsOn)    // energy beam cannot be used while shields on
                 {
                     playerHealth.ReducePower(20);
                     ui.setPower(playerHealth.GetCurrentPower());

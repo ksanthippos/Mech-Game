@@ -104,7 +104,7 @@ public class UIController : MonoBehaviour
     
     public void setMechs(int current, int max)
     {
-        mechsText.text = "Lives: " + current + "/" + max;
+        mechsText.text = "Mechs: " + current + "/" + max;
         if (current == 0)
         {
             mechsText.color = Color.red;

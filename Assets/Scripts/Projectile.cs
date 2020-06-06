@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour
 {
     
     public float speed;
+    public float maxSpeed;
+    public float acceleration;
     public float time;
     public float radius;
     public float damage;
@@ -27,8 +29,11 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         audioSource.Play();
-        rb.velocity = transform.forward * speed;
         
+        if (tag.Equals("Proj_Bullet") || tag.Equals("Proj_Beam"))   // bullet and beam travel at constant speed 
+        {
+            rb.velocity = transform.forward * speed;
+        }
     }
 
     // Update is called once per frame
@@ -37,7 +42,16 @@ public class Projectile : MonoBehaviour
         t -= Time.deltaTime;
         if (t < 0)
         {
+            // wat?
+            t = time;
+        }
+        
+        if (tag.Equals("Proj_Missile"))    // missile is accelerated
+        {
+            if (speed < maxSpeed)
+                speed += acceleration * Time.deltaTime * 100;
             
+            rb.velocity = transform.forward * speed;
         }
     }
 
