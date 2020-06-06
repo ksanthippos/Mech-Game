@@ -272,12 +272,16 @@ MonoBehaviour:
   turningSpeed: 4
   turretTurningSpeed: 3.5
   shootingCooldown: 0
+  weaponIndex: 0
+  maxAmmo: 5
+  currentAmmo: 0
   turret: {fileID: 1608560956613974391}
   muzzle: {fileID: 1608560956196015566}
   weapon: 0
   projectiles:
   - {fileID: 6167129411952547735, guid: aa5def24966d8664f9e69cdcd71b0463, type: 3}
   - {fileID: 6167129411952547735, guid: b0c978b738549ed4fb5517c0941d4029, type: 3}
+  - {fileID: 6167129411952547735, guid: 6cd84cacf18b1ea49a01c3d3368fb9c1, type: 3}
 --- !u!114 &1608560956559658395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,10 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861cef6d831789f42ac29c8069c40e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 100
   maxPower: 100
   maxHeat: 100
-  maxAmmo: 10
   shieldsOn: 0
   explosion: {fileID: 95971568008635028, guid: 4582121760e22414fbd92c9dd38d7e94, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}

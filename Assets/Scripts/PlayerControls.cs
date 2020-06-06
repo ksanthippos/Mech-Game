@@ -17,6 +17,8 @@ public class PlayerControls : MonoBehaviour
     public float turretTurningSpeed;
     public float shootingCooldown;
     public int weaponIndex;
+    public int maxAmmo;
+    public int currentAmmo;
 
     public Transform turret;
     public Transform muzzle;
@@ -25,38 +27,47 @@ public class PlayerControls : MonoBehaviour
     
     private Rigidbody rb;
     private Camera mainCamera;
+    private GameController gameController;
     private float maxRayDistance = 100f;
-    private int floorMask;
     private float t;
-
-
+    private int floorMask;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
         t = 0f;
         weaponIndex = 0;
+        currentAmmo = maxAmmo;
+        SetWeapon();
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
         floorMask = LayerMask.GetMask("Floor");
-        weapon = Weapon.Autocannon;    // default weapon
         shootingCooldown = projectiles[weaponIndex].GetComponent<Projectile>().shootingCooldown;    // default first from the list -> autocannon
+        gameController = GameController.instance;
+        
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // set current weapon
         shootingCooldown = projectiles[weaponIndex].GetComponent<Projectile>().shootingCooldown;
-        
-        if (t <= 0)    // allowed to shoot
+        SetWeapon();
+
+        if (t <= 0)    // cooling time ok
         {
             if (Input.GetButton("Fire1"))
             {
-                GameObject proj = Instantiate(projectiles[weaponIndex], muzzle.position, muzzle.rotation);
-                proj.GetComponent<Projectile>().shooterTag = tag;
-                t = shootingCooldown;
+                if (gameController.CheckOkToShoot(weapon))
+                {
+                    GameObject proj = Instantiate(projectiles[weaponIndex], muzzle.position, muzzle.rotation);
+                    proj.GetComponent<Projectile>().shooterTag = tag;
+                    t = shootingCooldown;    
+                }
             }
         }
-        else
+        else 
         {
             t -= Time.deltaTime;
         }
@@ -97,8 +108,22 @@ public class PlayerControls : MonoBehaviour
             Vector3 turningDirection = Vector3.RotateTowards(turret.forward, targetDirection, turretTurningSpeed * Time.deltaTime, 0f);
             turret.rotation = Quaternion.LookRotation(turningDirection);
         }
+    }
 
-
+    private void SetWeapon()
+    {
+        if (weaponIndex == 0)
+        {
+            weapon = Weapon.Autocannon;
+        }
+        else if (weaponIndex == 1)
+        {
+            weapon = Weapon.Missiles;
+        }
+        else if (weaponIndex == 2)
+        {
+            weapon = Weapon.Beam;
+        }
     }
 
 }

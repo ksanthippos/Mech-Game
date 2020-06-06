@@ -152,7 +152,16 @@ public class GameController : MonoBehaviour
         }
         ui.setPower(current);
     }
-
+    
+    public void SetHeat(float current, float max)
+    {
+        if (current < 0)
+        {
+            current = 0f;
+        }
+        ui.setHeat(current);
+    }
+    
     public void SetShields(bool value)
     {
         playerHealth.shieldsOn = value;
@@ -161,6 +170,35 @@ public class GameController : MonoBehaviour
         else
             ui.shieldsOff();
     }
+
+    public bool CheckOkToShoot(PlayerControls.Weapon weapon)
+    {
+        switch (weapon)
+        {
+            case PlayerControls.Weapon.Autocannon:
+                return true;
+            case PlayerControls.Weapon.Missiles:
+                if (playerControls.currentAmmo >= 1)
+                {
+                    playerControls.currentAmmo--;
+                    ui.setAmmo(playerControls.currentAmmo);
+                    return true;
+                }
+                break;
+            case PlayerControls.Weapon.Beam:
+                if (playerHealth.GetCurrentPower() >= 20)
+                {
+                    playerHealth.ReducePower(20);
+                    ui.setPower(playerHealth.GetCurrentPower());
+                    return true;
+                }
+                break;
+        }
+
+        return false;
+    }
+
+
     
     
 

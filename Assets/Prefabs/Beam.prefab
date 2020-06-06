@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 7058057957364946106}
   - component: {fileID: 2582164557510520380}
   m_Layer: 0
-  m_Name: Missile
-  m_TagString: Proj_Missile
+  m_Name: Beam
+  m_TagString: Proj_Beam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,12 +125,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a845fe72b4e04344b30d42e29725617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 100
   time: 1
-  radius: 2
-  damage: 20
-  heatDamage: 10
-  shootingCooldown: 1.5
+  radius: 0.5
+  damage: 10
+  heatDamage: 20
+  shootingCooldown: 2
   shooterTag: 
   explosion: {fileID: 5006644853754915010, guid: 90de73ae85c4abb4c86d9d66727a12a5,
     type: 3}
@@ -889,7 +889,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 0
     angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}

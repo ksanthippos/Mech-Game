@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     public float time;
     public float radius;
     public float damage;
+    public float heatDamage;
     public float shootingCooldown;
     public string shooterTag;
     public GameObject explosion;
@@ -49,7 +50,7 @@ public class Projectile : MonoBehaviour
             Health health = colliders[i].GetComponent<Health>();
             if (health != null)
             {
-                health.ReduceHealth(damage, tag);    // --> tag as a parameter
+                health.ReduceHealth(damage, heatDamage, tag);    // --> tag as a parameter
             }
         }
 

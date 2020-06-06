@@ -50,10 +50,10 @@ public class UIController : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    public void setHealth(float current)
+    public void setHealth(float value)
     {
-        healthText.text = "Health: " + current + "%";
-        if (current <= 25)
+        healthText.text = "Health: " + value + "%";
+        if (value <= 25)
         {
             healthText.color = Color.red;
         }
@@ -62,7 +62,46 @@ public class UIController : MonoBehaviour
             healthText.color = Color.white;
         }
     }
+    
+    public void setPower(float value)
+    {
+        powerText.text = "Power: " + value + "%";
+        if (value <= 25)
+        {
+            powerText.color = Color.red;
+        }
+        else
+        {
+            powerText.color = Color.white;
+        }
+    }
 
+    public void setHeat(float value)
+    {
+        heatText.text = "Heat: " + value + "%";
+        if (value >= 75)
+        {
+            heatText.color = Color.red;
+        }
+        else
+        {
+            heatText.color = Color.white;
+        }
+    }
+
+    public void setAmmo(int value)
+    {
+        ammoText.text = "Ammo: " + value;
+        if (value < 2)
+        {
+            ammoText.color = Color.red;
+        }
+        else
+        {
+            ammoText.color = Color.white;
+        }
+    }
+    
     public void setMechs(int current, int max)
     {
         mechsText.text = "Lives: " + current + "/" + max;
@@ -74,21 +113,6 @@ public class UIController : MonoBehaviour
         {
             mechsText.color = Color.white;
         }
-    }
-
-    public void setPower(float value)
-    {
-        powerText.text = "Power: " + value + "%";
-    }
-
-    public void setHeat(float value)
-    {
-        heatText.text = "Heat: " + value + "%";
-    }
-
-    public void setAmmo(int value)
-    {
-        ammoText.text = "Ammo: " + value;
     }
 
     public void toggleAutoCannon()

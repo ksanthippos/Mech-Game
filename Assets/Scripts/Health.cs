@@ -10,18 +10,16 @@ public class Health : MonoBehaviour
     public float maxHealth = 100;
     public float maxPower = 100;
     public float maxHeat = 100;
-    public int maxAmmo = 10;
     public bool shieldsOn = false;
 
     public GameObject explosion;
     public  Color damageColor = Color.red;
     public float damageFlashTime;
     
+    private float t;
     private float currentHealth;
     private float currentPower;
     private float currentHeat;
-    private float currentAmmo;
-    private float t;
     private bool dead = false;
     private Color originalColor;
     private Color originalEmissionColor;
@@ -34,7 +32,6 @@ public class Health : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentPower = maxPower;
-        currentAmmo = maxAmmo;
         currentHeat = 0f;
 
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
@@ -45,26 +42,24 @@ public class Health : MonoBehaviour
         {
             GameController.instance.SetHealth(currentHealth, maxHealth);
             GameController.instance.SetPower(currentPower, maxPower);
+            GameController.instance.SetHeat(currentHeat, maxHeat);
             GameController.instance.SetShields(false);
         }
     }
-
     
-    public void ReduceHealth(float damage, string tag)
+    public void ReduceHealth(float damage, float heatDamage, string tag)
     {
         StartCoroutine(DamageFlash());
 
-        // missile hit & shields on --> no damage
-        if (tag.Equals("Proj_Missile") && !shieldsOn)
-            currentHealth -= damage;    
-        
-        // energy beam hit & shields on --> drains power 
-        else if (tag.Equals("Proj_Beam") || tag.Equals("Proj_Bullet"))
+        if (tag.Equals("Proj_Bullet"))
         {
+            // no heat check from bullets
             if (shieldsOn)
             {
                 if (currentPower - damage > 0)
+                {
                     currentPower -= damage;
+                }
                 else
                 {
                     currentPower = 0f;
@@ -72,7 +67,49 @@ public class Health : MonoBehaviour
                 }
             }
             else
+            {
                 currentHealth -= damage;
+            }
+        }
+        else if (tag.Equals("Proj_Missile"))
+        {
+            HeatCheck(heatDamage, tag);
+            if (shieldsOn)
+            {
+                if (currentPower - damage > 0)
+                {
+                    currentPower -= damage / 6;    // missiles have only minor impact on shields
+                }
+                else
+                {
+                    currentPower = 0f;
+                    shieldsOn = false;
+                }
+            }
+            else
+            {
+                currentHealth -= damage;
+            }
+        }
+        else if (tag.Equals("Proj_Beam"))
+        {
+            HeatCheck(heatDamage, tag);
+            if (shieldsOn)
+            {
+                if (currentPower - damage > 0)
+                {
+                    currentPower -= damage;    // full impact on shields
+                }
+                else
+                {
+                    currentPower = 0f;
+                    shieldsOn = false;
+                }
+            }
+            else
+            {
+                currentHealth -= damage;
+            }
         }
         
         audioSource.Play();
@@ -81,12 +118,15 @@ public class Health : MonoBehaviour
         {
             GameController.instance.SetHealth(currentHealth, maxHealth);
             GameController.instance.SetPower(currentPower, maxPower);
-            
+            GameController.instance.SetHeat(currentHeat, maxHeat);
+
             if (currentPower <= 0)
                 GameController.instance.SetShields(false);
+
         }
         
-        if (currentHealth <= 0 && !dead)
+        // 0 HP or 100% heat --> player dies
+        if ((currentHealth <= 0 || currentHeat >= maxHeat) && !dead)
         {
             dead = true;
             if (gameObject.CompareTag("Enemy") || gameObject.CompareTag("Enemy_Tank") || gameObject.CompareTag("Enemy_Turret") || gameObject.CompareTag("Enemy_MissileTank") 
@@ -120,11 +160,34 @@ public class Health : MonoBehaviour
             r.material.color = originalColor;
             r.material.SetColor("_EmissionColor", originalEmissionColor);
         }
-        
     }
 
     public float GetCurrentPower()
     {
         return currentPower;
+    }
+
+    public void ReducePower(float value)
+    {
+        currentPower -= value;
+    }
+
+    // checking for heat damage: different impact when shields on/off
+    private void HeatCheck(float heatDamage, string tag)
+    {
+        if (tag.Equals("Proj_Missile"))
+        {
+            if (shieldsOn && currentHeat + heatDamage < 100)
+                currentHeat += heatDamage / 4;
+            else
+                currentHeat += heatDamage;
+        }
+        else if (tag.Equals("Proj_Beam"))
+        {
+            if (shieldsOn && currentHeat + heatDamage < 100)
+                currentHeat += heatDamage / 2;
+            else
+                currentHeat += heatDamage;
+        }
     }
 }
