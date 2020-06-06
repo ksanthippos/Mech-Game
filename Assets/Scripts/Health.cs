@@ -9,8 +9,9 @@ public class Health : MonoBehaviour
     public float maxHealth = 100;
     public float maxPower = 100;
     public float maxHeat = 100;
-    public bool shieldsOn;
     public float damageFlashTime;
+    public float heatCoolingRate;
+    public bool shieldsOn;
     public GameObject explosion;
     public  Color damageColor = Color.red;
     
@@ -44,7 +45,12 @@ public class Health : MonoBehaviour
             GameController.instance.SetShields(false);
         }
     }
-    
+
+    private void Update()
+    {
+
+    }
+
     public void ReduceHealth(float damage, float heatDamage, string tag)
     {
         StartCoroutine(DamageFlash());

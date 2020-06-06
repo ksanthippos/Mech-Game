@@ -117,6 +117,12 @@ public class GameController : MonoBehaviour
                 ui.shieldsOff();
             }
         }
+        
+        if (playerHealth.GetCurrentHeat() > 0)
+        {
+            playerHealth.AddHeat(-playerHealth.heatCoolingRate * Time.deltaTime);    // heat damage is reduced over time
+            SetHeat(playerHealth.GetCurrentHeat(), playerHealth.maxHeat);
+        }
     }
 
     public void EnemyDestroyed()

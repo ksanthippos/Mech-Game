@@ -297,10 +297,11 @@ MonoBehaviour:
   maxHealth: 100
   maxPower: 100
   maxHeat: 100
+  damageFlashTime: 0.1
+  heatCoolingRate: 0.5
   shieldsOn: 0
   explosion: {fileID: 95971568008635028, guid: 4582121760e22414fbd92c9dd38d7e94, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
-  damageFlashTime: 0.1
 --- !u!82 &688565160621080299
 AudioSource:
   m_ObjectHideFlags: 0
