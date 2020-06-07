@@ -42,7 +42,6 @@ public class Projectile : MonoBehaviour
         t -= Time.deltaTime;
         if (t < 0)
         {
-            // wat?
             t = time;
         }
         

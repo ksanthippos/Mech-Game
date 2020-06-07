@@ -192,7 +192,9 @@ public class GameController : MonoBehaviour
                 if (playerHealth.GetCurrentPower() >= 20 && !playerHealth.shieldsOn)    // energy beam cannot be used while shields on
                 {
                     playerHealth.ReducePower(20);
+                    playerHealth.AddHeat(10);
                     ui.setPower(playerHealth.GetCurrentPower());
+                    ui.setHeat(playerHealth.GetCurrentHeat());
                     return true;
                 }
                 break;

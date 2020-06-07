@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  maxPower: 100
+  maxPower: 10000
   maxHeat: 100
   damageFlashTime: 0.1
   heatCoolingRate: 0.5

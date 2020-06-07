@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
+  maxSpeed: 0
+  acceleration: 0
   time: 0.1
   radius: 2
   damage: 25
@@ -3992,9 +3994,9 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 0
-    ratio: 0
-    light: {fileID: 0}
+    enabled: 1
+    ratio: 1
+    light: {fileID: 6373072264444505847, guid: 2662f0a2297897c46a8d5127e71914aa, type: 3}
     randomDistribution: 1
     color: 1
     range: 1
@@ -4107,7 +4109,7 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
+    enabled: 1
     mode: 0
     ratio: 1
     lifetime:

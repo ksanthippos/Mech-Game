@@ -46,11 +46,6 @@ public class Health : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-
-    }
-
     public void ReduceHealth(float damage, float heatDamage, string tag)
     {
         StartCoroutine(DamageFlash());
@@ -144,6 +139,7 @@ public class Health : MonoBehaviour
         }
     }
 
+    // damage light effect
     private IEnumerator DamageFlash()
     {
         t = damageFlashTime;
