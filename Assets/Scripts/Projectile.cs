@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using UnityEditor;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -22,7 +23,13 @@ public class Projectile : MonoBehaviour
     private Rigidbody rb;
     private AudioSource audioSource;
     
-    // Start is called before the first frame update
+    // TEST
+    private Camera mainCamera;
+    private float maxRayDistance = 100f;
+    private int floorMask;
+    private PlayerControls playerControls;
+    // *********
+    
     void Start()
     {
         t = time;

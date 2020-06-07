@@ -1093,7 +1093,7 @@ MonoBehaviour:
   score: 0
   lives: 3
   scorePerTank: 10
-  enemyStartingAmount: 0
+  enemyStartingAmount: 2
   maxEnemiesAmount: 6
   ui: {fileID: 1946649689}
   audioSource: {fileID: 534295893}
@@ -2565,8 +2565,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3077f0a77a600c741afd4a5b8450349c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4174106854261611534, guid: 4ef81d7770bbf9f49a87d27328bac8cd, type: 3}
-  enemy: {fileID: 1987282871279552919, guid: 37de46bb2b9a43f4195c91af818b7682, type: 3}
+  player: {fileID: 3071908034222254154, guid: 4ef81d7770bbf9f49a87d27328bac8cd, type: 3}
+  enemy: {fileID: 1987282871279552919, guid: 2cab194bc2f4a1044ab06ffc17d5e920, type: 3}
   area: {fileID: 306266361}
   range: 2
   spawnHeight: 3

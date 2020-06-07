@@ -308,7 +308,7 @@ Transform:
   m_GameObject: {fileID: 3071908034222254154}
   m_LocalRotation: {x: 0.0017143872, y: -0.008052335, z: 0.002897381, w: 0.9999619}
   m_LocalPosition: {x: 613.24, y: 247.66, z: 1044.68}
-  m_LocalScale: {x: 0.9831818, y: 0.9831818, z: 0.9831818}
+  m_LocalScale: {x: 0.658191, y: 0.658191, z: 0.658191}
   m_Children:
   - {fileID: 6173185453932935694}
   - {fileID: 1127928553846400437}
@@ -365,8 +365,8 @@ MonoBehaviour:
   maxHealth: 100
   maxPower: 100
   maxHeat: 100
-  damageFlashTime: 0
-  heatCoolingRate: 0
+  damageFlashTime: 0.1
+  heatCoolingRate: 0.5
   shieldsOn: 0
   explosion: {fileID: 95971568008635028, guid: 4582121760e22414fbd92c9dd38d7e94, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
@@ -383,11 +383,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 6
-  turningSpeed: 4
+  turningSpeed: 3
   turretTurningSpeed: 2
   shootingCooldown: 0
   weaponIndex: 0
-  maxAmmo: 0
+  maxAmmo: 10
   currentAmmo: 0
   turret: {fileID: 950224804816579530}
   muzzle1: {fileID: 8502071593226318279}
@@ -513,7 +513,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4624248511167598539}
-  m_LocalRotation: {x: 0.18292189, y: 0, z: 0, w: 0.98312753}
+  m_LocalRotation: {x: 0.0050614406, y: 0, z: 0, w: 0.99998724}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -525,7 +525,7 @@ Transform:
   - {fileID: 2336818956996525622}
   m_Father: {fileID: 901244526282926197}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 21.08, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.58, y: 0, z: 0}
 --- !u!1 &4724057667543398312
 GameObject:
   m_ObjectHideFlags: 0

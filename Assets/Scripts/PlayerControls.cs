@@ -64,7 +64,7 @@ public class PlayerControls : MonoBehaviour
                     proj1.GetComponent<Projectile>().shooterTag = tag;
                     GameObject proj2 = Instantiate(projectiles[weaponIndex], muzzle2.position, muzzle2.rotation);
                     proj2.GetComponent<Projectile>().shooterTag = tag;
-                    t = shootingCooldown;    
+                    t = shootingCooldown;
                 }
             }
         }
@@ -105,6 +105,7 @@ public class PlayerControls : MonoBehaviour
             targetDirection.y = 0f;
             Vector3 turningDirection = Vector3.RotateTowards(turret.forward, targetDirection, turretTurningSpeed * Time.deltaTime, 0f);
             turret.rotation = Quaternion.LookRotation(turningDirection);
+
         }
     }
 
