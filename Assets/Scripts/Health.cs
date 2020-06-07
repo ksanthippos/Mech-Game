@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     private float currentHealth;
     private float currentPower;
     private float currentHeat;
-    private bool dead = false;
+    private bool dead;
     private Color originalColor;
     private Color originalEmissionColor;
     private MeshRenderer[] meshRenderers;

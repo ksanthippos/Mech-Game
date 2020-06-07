@@ -1093,7 +1093,7 @@ MonoBehaviour:
   score: 0
   lives: 3
   scorePerTank: 10
-  enemyStartingAmount: 2
+  enemyStartingAmount: 0
   maxEnemiesAmount: 6
   ui: {fileID: 1946649689}
   audioSource: {fileID: 534295893}
