@@ -20,8 +20,7 @@ public class PlayerControls : MonoBehaviour
     public int currentAmmo;
 
     public Transform turret;
-    public Transform muzzle1;
-    public Transform muzzle2;
+    public Transform muzzle;
     public Weapon weapon;
     public List<GameObject> projectiles;
     
@@ -60,10 +59,8 @@ public class PlayerControls : MonoBehaviour
             {
                 if (gameController.CheckOkToShoot(weapon))
                 {
-                    GameObject proj1 = Instantiate(projectiles[weaponIndex], muzzle1.position, muzzle1.rotation);
+                    GameObject proj1 = Instantiate(projectiles[weaponIndex], muzzle.position, muzzle.rotation);
                     proj1.GetComponent<Projectile>().shooterTag = tag;
-                    GameObject proj2 = Instantiate(projectiles[weaponIndex], muzzle2.position, muzzle2.rotation);
-                    proj2.GetComponent<Projectile>().shooterTag = tag;
                     t = shootingCooldown;
                 }
             }
@@ -105,7 +102,6 @@ public class PlayerControls : MonoBehaviour
             targetDirection.y = 0f;
             Vector3 turningDirection = Vector3.RotateTowards(turret.forward, targetDirection, turretTurningSpeed * Time.deltaTime, 0f);
             turret.rotation = Quaternion.LookRotation(turningDirection);
-
         }
     }
 
