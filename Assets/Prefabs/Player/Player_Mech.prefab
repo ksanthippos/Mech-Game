@@ -554,8 +554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fbcd2e82d2efd244aacd0664574d216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
-  turningSpeed: 3
+  movementSpeed: 4
+  turningSpeed: 2
   turretTurningSpeed: 2
   shootingCooldown: 0
   weaponIndex: 0

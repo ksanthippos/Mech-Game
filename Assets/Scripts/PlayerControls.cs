@@ -86,12 +86,24 @@ public class PlayerControls : MonoBehaviour
             rb.angularVelocity = turning;   
         }
 
-        // moving forw/backw
+        /*// moving forw/backw
         if (inputVertical != 0)
         {
             Vector3 movement = transform.forward * inputVertical * movementSpeed;
             rb.velocity = movement;
+        }*/
+        // moving forw/backw
+        if (inputVertical > 0)
+        {
+            Vector3 movement = transform.forward * inputVertical * movementSpeed;
+            rb.velocity = movement;
         }
+        if (inputVertical < 0)
+        {
+            Vector3 movement = transform.forward * inputVertical * (movementSpeed * 0.5f);
+            rb.velocity = movement;
+        }
+        
 
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);    // ray pointing towards mouse cursor
         RaycastHit hit;    // point where ray hits
@@ -100,6 +112,7 @@ public class PlayerControls : MonoBehaviour
         {
             Vector3 targetDirection = hit.point - turret.position;
             targetDirection.y = 0f;
+            
             Vector3 turningDirection = Vector3.RotateTowards(turret.forward, targetDirection, turretTurningSpeed * Time.deltaTime, 0f);
             turret.rotation = Quaternion.LookRotation(turningDirection);
         }
