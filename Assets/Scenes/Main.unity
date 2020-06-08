@@ -730,6 +730,7 @@ GameObject:
   - component: {fileID: 306266363}
   - component: {fileID: 306266362}
   - component: {fileID: 306266361}
+  - component: {fileID: 306266365}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -812,6 +813,25 @@ Transform:
   m_Father: {fileID: 1425503835}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &306266365
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306266360}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b410cbb213d4814b9479dd53c100cb6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &399811060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2565,7 +2585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3077f0a77a600c741afd4a5b8450349c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5244382573194392472, guid: 4ef81d7770bbf9f49a87d27328bac8cd, type: 3}
+  player: {fileID: 4940351476093786962, guid: 18d085ca3a647e446bf157698f4794f3, type: 3}
   enemy: {fileID: 1987282871279552919, guid: 4ae5a841e885aad48a2ed2a2d9a736f4, type: 3}
   area: {fileID: 306266361}
   range: 2
