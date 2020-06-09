@@ -27,6 +27,7 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody rb;
     private Camera mainCamera;
     private GameController gameController;
+    private Animator animator;
     private float maxRayDistance = 100f;
     private float t;
     private int floorMask;
@@ -44,7 +45,8 @@ public class PlayerControls : MonoBehaviour
         floorMask = LayerMask.GetMask("Floor");
         shootingCooldown = projectiles[weaponIndex].GetComponent<Projectile>().shootingCooldown;    // default first from the list -> autocannon
         gameController = GameController.instance;
-        
+        animator = GetComponent<Animator>();
+
     }
     
     private void Update()
@@ -97,14 +99,15 @@ public class PlayerControls : MonoBehaviour
         {
             Vector3 movement = transform.forward * inputVertical * movementSpeed;
             rb.velocity = movement;
+            //animator.SetTrigger("Run");
         }
         if (inputVertical < 0)
         {
             Vector3 movement = transform.forward * inputVertical * (movementSpeed * 0.5f);
             rb.velocity = movement;
+            //animator.SetTrigger("Walk");
         }
         
-
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);    // ray pointing towards mouse cursor
         RaycastHit hit;    // point where ray hits
 
