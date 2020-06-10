@@ -47,7 +47,7 @@ public class PlayerControls : MonoBehaviour
         gameController = GameController.instance;
         //animator = GetComponent<Animator>();
 
-        animator = GameObject.FindWithTag("Torso_Low").GetComponent<Animator>();
+        animator = GameObject.FindWithTag("Torso_Low").GetComponent<Animator>();    // animator resides in the lower torso, which is a child object
     }
     
     private void Update()
@@ -88,25 +88,40 @@ public class PlayerControls : MonoBehaviour
             Vector3 turning = Vector3.up * inputHorizontal * turningSpeed;    
             rb.angularVelocity = turning; 
             animator.SetBool("Walk", true);
+            animator.SetBool("Run", false);
         }
+        
+        // ANIMATIONS FOR RUNNING AND TURNING ALSO! running --> another if statement with shift
+        
         // forward
         if (inputVertical > 0)
         {
             Vector3 movement = transform.forward * inputVertical * movementSpeed;
             rb.velocity = movement;
             animator.SetBool("Walk", true);
+            animator.SetBool("Run", false);
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                Vector3 movement2 = transform.forward * inputVertical * movementSpeed * 2;
+                rb.velocity = movement2;
+                animator.SetBool("Run", true);
+                animator.SetBool("Walk", false);
+            }
         }
         // reverse is 50% slower
         if (inputVertical < 0)
         {
-            Vector3 movement = transform.forward * inputVertical * (movementSpeed * 0.5f);
+            Vector3 movement = transform.forward * inputVertical * (movementSpeed * 0.7f);
             rb.velocity = movement;
             animator.SetBool("Walk", true);
+            animator.SetBool("Run", false);
         }
         // not moving
         if (inputHorizontal == 0 && inputVertical == 0)
         {
             animator.SetBool("Walk", false);
+            animator.SetBool("Run", false); 
         } 
         
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);    // ray pointing towards mouse cursor

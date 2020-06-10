@@ -2585,7 +2585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3077f0a77a600c741afd4a5b8450349c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5563817950654206548, guid: 5e473ee157f33614bb0bd44f6369bdfd, type: 3}
+  player: {fileID: 2385377588228053580, guid: 5e473ee157f33614bb0bd44f6369bdfd, type: 3}
   enemy: {fileID: 1987282871279552919, guid: 4ae5a841e885aad48a2ed2a2d9a736f4, type: 3}
   area: {fileID: 306266361}
   range: 2
