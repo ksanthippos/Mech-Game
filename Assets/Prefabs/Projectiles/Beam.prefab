@@ -134,8 +134,7 @@ MonoBehaviour:
   heatDamage: 20
   shootingCooldown: 2
   shooterTag: 
-  explosion: {fileID: 5006644853754915010, guid: 90de73ae85c4abb4c86d9d66727a12a5,
-    type: 3}
+  explosion: {fileID: 100006, guid: 2e7e92bc7175b744ea40878dedfa79e4, type: 3}
 --- !u!82 &2582164557510520380
 AudioSource:
   m_ObjectHideFlags: 0

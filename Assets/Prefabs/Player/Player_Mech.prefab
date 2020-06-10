@@ -192,7 +192,7 @@ MonoBehaviour:
   turretTurningSpeed: 2
   shootingCooldown: 0
   weaponIndex: 0
-  maxAmmo: 5
+  maxAmmo: 100
   currentAmmo: 0
   turret: {fileID: 6662601725668600694}
   muzzle: {fileID: 3790350169020818901}
@@ -219,7 +219,7 @@ MonoBehaviour:
   damageFlashTime: 0.1
   heatCoolingRate: 0.5
   shieldsOn: 0
-  explosion: {fileID: 95971568008635028, guid: 4582121760e22414fbd92c9dd38d7e94, type: 3}
+  explosion: {fileID: 100010, guid: d609d5ebc845aca409f72e9c6a56dc60, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!82 &4977071426536587657
 AudioSource:

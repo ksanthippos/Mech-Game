@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1987282871279552918}
   - component: {fileID: -98592167277339228}
   m_Layer: 0
-  m_Name: Enemy_Turret 3
+  m_Name: Enemy_Turret
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   damageFlashTime: 0.1
   heatCoolingRate: 0
   shieldsOn: 0
-  explosion: {fileID: 95971568008635028, guid: bd8535852ed208c4e807a4a727261cc2, type: 3}
+  explosion: {fileID: 100008, guid: 1ae4db7b36e51124b89d2b32303a7a0b, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &1987282871279552918
 MonoBehaviour:
