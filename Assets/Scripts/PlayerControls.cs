@@ -45,8 +45,9 @@ public class PlayerControls : MonoBehaviour
         floorMask = LayerMask.GetMask("Floor");
         shootingCooldown = projectiles[weaponIndex].GetComponent<Projectile>().shootingCooldown;    // default first from the list -> autocannon
         gameController = GameController.instance;
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
 
+        animator = GameObject.FindWithTag("Torso_Low").GetComponent<Animator>();
     }
     
     private void Update()
@@ -85,28 +86,28 @@ public class PlayerControls : MonoBehaviour
         if (inputHorizontal != 0)
         {
             Vector3 turning = Vector3.up * inputHorizontal * turningSpeed;    
-            rb.angularVelocity = turning;   
+            rb.angularVelocity = turning; 
+            animator.SetBool("Walk", true);
         }
-
-        /*// moving forw/backw
-        if (inputVertical != 0)
-        {
-            Vector3 movement = transform.forward * inputVertical * movementSpeed;
-            rb.velocity = movement;
-        }*/
-        // moving forw/backw
+        // forward
         if (inputVertical > 0)
         {
             Vector3 movement = transform.forward * inputVertical * movementSpeed;
             rb.velocity = movement;
-            //animator.SetTrigger("Run");
+            animator.SetBool("Walk", true);
         }
+        // reverse is 50% slower
         if (inputVertical < 0)
         {
             Vector3 movement = transform.forward * inputVertical * (movementSpeed * 0.5f);
             rb.velocity = movement;
-            //animator.SetTrigger("Walk");
+            animator.SetBool("Walk", true);
         }
+        // not moving
+        if (inputHorizontal == 0 && inputVertical == 0)
+        {
+            animator.SetBool("Walk", false);
+        } 
         
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);    // ray pointing towards mouse cursor
         RaycastHit hit;    // point where ray hits
