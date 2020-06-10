@@ -6,9 +6,9 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     
-    public float maxHealth = 100;
-    public float maxPower = 100;
-    public float maxHeat = 100;
+    public float maxHealth;
+    public float maxPower;
+    public float maxHeat;
     public float damageFlashTime;
     public float heatCoolingRate;
     public bool shieldsOn;
@@ -19,14 +19,15 @@ public class Health : MonoBehaviour
     private float currentHealth;
     private float currentPower;
     private float currentHeat;
+    private bool overHeat;
     private bool dead;
     private Color originalColor;
     private Color originalEmissionColor;
     private MeshRenderer[] meshRenderers;
    
     private AudioSource audioSource;
-
-    // Start is called before the first frame update
+    
+    
     void Start()
     {
         currentHealth = maxHealth;
@@ -46,13 +47,14 @@ public class Health : MonoBehaviour
         }
     }
 
+    // called whenever a gameobject is hit
     public void ReduceHealth(float damage, float heatDamage, string tag)
     {
         StartCoroutine(DamageFlash());
 
         if (tag.Equals("Proj_Bullet"))
         {
-            // no heat check from bullets
+            // no heat damage from bullets
             if (shieldsOn)
             {
                 if (currentPower - damage > 0)
@@ -124,19 +126,8 @@ public class Health : MonoBehaviour
 
         }
         
-        // 0 HP or 100% heat --> player dies
-        if ((currentHealth <= 0 || currentHeat >= maxHeat) && !dead)
-        {
-            dead = true;
-            if (gameObject.CompareTag("Enemy") || gameObject.CompareTag("Enemy_Tank") || gameObject.CompareTag("Enemy_Turret") || gameObject.CompareTag("Enemy_MissileTank") 
-                || gameObject.CompareTag("Enemy_SAM") || gameObject.CompareTag("Enemy_BeamAPC") || gameObject.CompareTag("Enemy_CannonAPC"))
-            {
-                GameController.instance.EnemyDestroyed();   
-            }
-            
-            Instantiate(explosion, transform.position, new Quaternion());
-            Destroy(gameObject);
-        }
+        DeathCheck();    // death or nay?
+
     }
 
     // damage light effect
@@ -181,24 +172,45 @@ public class Health : MonoBehaviour
     public void AddHeat(float value)
     {
         currentHeat += value;
+        if (currentHeat >= maxHeat)
+            overHeat = true;
     }
-
-    // checking for heat damage: different impact when shields on/off
+    
+    // checking if gameobject has HP 0% or heat 100% --> DEATH!
+    public void DeathCheck()
+    {
+        if ((currentHealth <= 0 || overHeat) && !dead)
+        {
+            dead = true;
+            if (gameObject.CompareTag("Enemy") || gameObject.CompareTag("Enemy_Tank") || gameObject.CompareTag("Enemy_Turret") || gameObject.CompareTag("Enemy_MissileTank") 
+                || gameObject.CompareTag("Enemy_SAM") || gameObject.CompareTag("Enemy_BeamAPC") || gameObject.CompareTag("Enemy_CannonAPC"))
+            {
+                GameController.instance.EnemyDestroyed();   
+            }
+            
+            Instantiate(explosion, transform.position, new Quaternion());
+            Destroy(gameObject);
+        }
+    }
+    
+    // beam adds most heat damage, shields reduce some
     private void HeatCheck(float heatDamage, string tag)
     {
         if (tag.Equals("Proj_Missile"))
         {
-            if (shieldsOn && currentHeat + heatDamage < 100)
-                currentHeat += heatDamage / 4;
+            if (shieldsOn && currentHeat + heatDamage < 100)    
+                AddHeat(heatDamage / 4);
             else
-                currentHeat += heatDamage;
+                AddHeat(heatDamage);
         }
         else if (tag.Equals("Proj_Beam"))
         {
             if (shieldsOn && currentHeat + heatDamage < 100)
-                currentHeat += heatDamage / 2;
+                AddHeat(heatDamage / 2);
             else
-                currentHeat += heatDamage;
+                AddHeat(heatDamage);
         }
     }
+    
+    
 }

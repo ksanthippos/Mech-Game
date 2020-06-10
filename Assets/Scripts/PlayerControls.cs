@@ -23,6 +23,8 @@ public class PlayerControls : MonoBehaviour
     public Transform muzzle;
     public Weapon weapon;
     public List<GameObject> projectiles;
+    public GameObject bulletFlash;
+    public GameObject beamFlash;
     
     private Rigidbody rb;
     private Camera mainCamera;
@@ -33,7 +35,6 @@ public class PlayerControls : MonoBehaviour
     private int floorMask;
     
     
-    // Start is called before the first frame update
     void Start()
     {
         t = 0f;
@@ -44,9 +45,11 @@ public class PlayerControls : MonoBehaviour
         mainCamera = Camera.main;
         floorMask = LayerMask.GetMask("Floor");
         shootingCooldown = projectiles[weaponIndex].GetComponent<Projectile>().shootingCooldown;    // default first from the list -> autocannon
+        bulletFlash = GameObject.FindWithTag("Bullet_Flash");
+        bulletFlash.SetActive(false);
+        beamFlash = GameObject.FindWithTag("Beam_Flash");
+        beamFlash.SetActive(false);
         gameController = GameController.instance;
-        //animator = GetComponent<Animator>();
-
         animator = GameObject.FindWithTag("Torso_Low").GetComponent<Animator>();    // animator resides in the lower torso, which is a child object
     }
     
@@ -60,17 +63,30 @@ public class PlayerControls : MonoBehaviour
         {
             if (Input.GetButton("Fire1"))
             {
-                if (gameController.CheckOkToShoot(weapon))
+                // HEAT CHECK HERE!! CheckOKShoot
+                
+                if (gameController.CheckOkToShoot(weapon))    
                 {
                     GameObject proj1 = Instantiate(projectiles[weaponIndex], muzzle.position, muzzle.rotation);
                     proj1.GetComponent<Projectile>().shooterTag = tag;
                     t = shootingCooldown;
+                    
+                    if (weapon == Weapon.Autocannon)
+                        bulletFlash.SetActive(true);
+                    else if (weapon == Weapon.Beam)
+                        beamFlash.SetActive(true);
                 }
+            }
+            else
+            {
+                bulletFlash.SetActive(false);    
+                beamFlash.SetActive(false);
             }
         }
         else 
         {
             t -= Time.deltaTime;
+            
         }
     }
     
@@ -83,7 +99,7 @@ public class PlayerControls : MonoBehaviour
         float inputVertical = Input.GetAxis("Vertical");
 
         // turning left and right
-        if (inputHorizontal != 0)
+        if (inputHorizontal != 0 && inputVertical != 0)
         {
             Vector3 turning = Vector3.up * inputHorizontal * turningSpeed;    
             rb.angularVelocity = turning; 
@@ -91,9 +107,7 @@ public class PlayerControls : MonoBehaviour
             animator.SetBool("Run", false);
         }
         
-        // ANIMATIONS FOR RUNNING AND TURNING ALSO! running --> another if statement with shift
-        
-        // forward
+        // forward: walk & run
         if (inputVertical > 0)
         {
             Vector3 movement = transform.forward * inputVertical * movementSpeed;
@@ -101,7 +115,7 @@ public class PlayerControls : MonoBehaviour
             animator.SetBool("Walk", true);
             animator.SetBool("Run", false);
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))    // run
             {
                 Vector3 movement2 = transform.forward * inputVertical * movementSpeed * 2;
                 rb.velocity = movement2;
@@ -121,7 +135,7 @@ public class PlayerControls : MonoBehaviour
         if (inputHorizontal == 0 && inputVertical == 0)
         {
             animator.SetBool("Walk", false);
-            animator.SetBool("Run", false); 
+            animator.SetBool("Run", false);
         } 
         
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);    // ray pointing towards mouse cursor

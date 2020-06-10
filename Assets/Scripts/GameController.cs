@@ -56,9 +56,10 @@ public class GameController : MonoBehaviour
         AudioListener.volume = volumeLevel;
     }
     
-    // Update is called once per frame
     void Update()
     {
+        playerHealth.DeathCheck();    // first things first =)
+        
         if (player == null)    // player has died
         { 
             if (currentLives > 0)
@@ -118,9 +119,10 @@ public class GameController : MonoBehaviour
             }
         }
         
+        // heat damage is reduced over time
         if (playerHealth.GetCurrentHeat() > 0)
         {
-            playerHealth.AddHeat(-playerHealth.heatCoolingRate * Time.deltaTime);    // heat damage is reduced over time
+            playerHealth.AddHeat(-playerHealth.heatCoolingRate * Time.deltaTime);    
             SetHeat(playerHealth.GetCurrentHeat(), playerHealth.maxHeat);
         }
     }

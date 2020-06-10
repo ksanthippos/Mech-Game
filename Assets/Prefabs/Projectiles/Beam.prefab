@@ -34,6 +34,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 1.68}
   m_Children:
   - {fileID: 7339282495204754127}
+  - {fileID: 4940371236608416142}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -259,8 +260,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4940371236608416142}
+  m_Children: []
   m_Father: {fileID: 2977696102924097702}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -892,7 +892,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 25
+    angle: 1
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -4991,7 +4991,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 7339282495204754127}
+    m_TransformParent: {fileID: 2977696102924097702}
     m_Modifications:
     - target: {fileID: 867562102445852186, guid: a2fbac962d6c3b54f9314749acc35dc6,
         type: 3}
@@ -5056,17 +5056,17 @@ PrefabInstance:
     - target: {fileID: 8202787958013494227, guid: a2fbac962d6c3b54f9314749acc35dc6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8202787958013494227, guid: a2fbac962d6c3b54f9314749acc35dc6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8202787958013494227, guid: a2fbac962d6c3b54f9314749acc35dc6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8202787958013494227, guid: a2fbac962d6c3b54f9314749acc35dc6,
         type: 3}
@@ -5076,7 +5076,7 @@ PrefabInstance:
     - target: {fileID: 8202787958013494227, guid: a2fbac962d6c3b54f9314749acc35dc6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8202787958013494227, guid: a2fbac962d6c3b54f9314749acc35dc6,
         type: 3}
