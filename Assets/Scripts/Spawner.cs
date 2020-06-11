@@ -5,12 +5,13 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
+    public float range;
+    public float spawnHeight;
     public GameObject player;
     public GameObject enemy;
     public Collider area;
-    public float range;
-    public float spawnHeight;
-
+    
+    
     public GameObject SpawnPlayer()
     {
         return Spawn(player);

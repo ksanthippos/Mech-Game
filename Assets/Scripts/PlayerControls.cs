@@ -63,8 +63,6 @@ public class PlayerControls : MonoBehaviour
         {
             if (Input.GetButton("Fire1"))
             {
-                // HEAT CHECK HERE!! CheckOKShoot
-                
                 if (gameController.CheckOkToShoot(weapon))    
                 {
                     GameObject proj1 = Instantiate(projectiles[weaponIndex], muzzle.position, muzzle.rotation);
@@ -86,7 +84,6 @@ public class PlayerControls : MonoBehaviour
         else 
         {
             t -= Time.deltaTime;
-            
         }
     }
     
@@ -123,6 +120,7 @@ public class PlayerControls : MonoBehaviour
                 animator.SetBool("Walk", false);
             }
         }
+        
         // reverse is 50% slower
         if (inputVertical < 0)
         {
@@ -131,6 +129,7 @@ public class PlayerControls : MonoBehaviour
             animator.SetBool("Walk", true);
             animator.SetBool("Run", false);
         }
+        
         // not moving
         if (inputHorizontal == 0 && inputVertical == 0)
         {
@@ -141,6 +140,7 @@ public class PlayerControls : MonoBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);    // ray pointing towards mouse cursor
         RaycastHit hit;    // point where ray hits
 
+        // turret aiming
         if (Physics.Raycast(ray, out hit, maxRayDistance, floorMask))
         {
             Vector3 targetDirection = hit.point - turret.position;
@@ -151,6 +151,7 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    // weapon enum setup
     private void SetWeapon()
     {
         if (weaponIndex == 0)

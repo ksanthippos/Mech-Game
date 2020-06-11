@@ -16,19 +16,18 @@ public class Projectile : MonoBehaviour
     public float damage;
     public float heatDamage;
     public float shootingCooldown;
+    public float lifeTime;
     public string shooterTag;
     public GameObject explosion;
 
     private float t;
-    private Rigidbody rb;
-    private AudioSource audioSource;
-    
-    // TEST
-    private Camera mainCamera;
     private float maxRayDistance = 100f;
     private int floorMask;
+    private Rigidbody rb;
+    private AudioSource audioSource;
+    private Camera mainCamera;
     private PlayerControls playerControls;
-    // *********
+
     
     void Start()
     {
@@ -42,8 +41,7 @@ public class Projectile : MonoBehaviour
             rb.velocity = transform.forward * speed;
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         t -= Time.deltaTime;
@@ -59,6 +57,13 @@ public class Projectile : MonoBehaviour
             
             rb.velocity = transform.forward * speed;
         }
+        
+        // projectiles are destroyed afterwards
+        lifeTime -= Time.deltaTime;
+        
+        if (lifeTime <= 0) 
+            Destroy(gameObject);
+        
     }
 
     private void Explode()

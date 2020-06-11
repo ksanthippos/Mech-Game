@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public int maxEnemiesAmount;
     public UIController ui;
     public AudioSource audioSource;
-    public float volumeLevel;
+    public float volumeLevel;    // REAL MIXER INSTEAD OF THIS
 
     private int currentLives;
     private int currentEnemyAmount;

@@ -11,7 +11,7 @@ public class SpawnBlocks : MonoBehaviour
     public GameObject block;
     public Collider ground;
     
-    // Start is called before the first frame update
+    
     void Start()
     {
         Vector3 minPoint = ground.bounds.min;
@@ -19,14 +19,22 @@ public class SpawnBlocks : MonoBehaviour
 
         for (int i = 0; i < amount; i++)
         {
-            float randomx = Random.Range(minPoint.x, maxPoint.x);
+            /*float randomx = Random.Range(minPoint.x, maxPoint.x);
             float randomz = Random.Range(minPoint.z, maxPoint.z);
             float randomSize = Random.Range(minSize, maxSize);
             
             Vector3 position = new Vector3(randomx, maxPoint.y + randomSize / 2, randomz);
             GameObject spawnedBlock = Instantiate(block, position, new Quaternion(), transform);
             spawnedBlock.transform.localScale *= randomSize;
-            spawnedBlock.GetComponent<Health>().maxHealth = randomSize * 25;
+            spawnedBlock.GetComponent<Health>().maxHealth = randomSize * 25;*/
+            
+            float randomx = Random.Range(minPoint.x, maxPoint.x);
+            float randomz = Random.Range(minPoint.z, maxPoint.z);
+            float randomSize = Random.Range(minSize, maxSize);
+            Vector3 position = new Vector3(randomx, maxPoint.y + randomSize / 4, randomz);
+            GameObject spawnedBlock = Instantiate(block, position, new Quaternion(), transform);
+            spawnedBlock.transform.localScale *= randomSize;
+            
 
         }
     }

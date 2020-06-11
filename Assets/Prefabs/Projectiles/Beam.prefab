@@ -134,6 +134,7 @@ MonoBehaviour:
   damage: 25
   heatDamage: 20
   shootingCooldown: 2
+  lifeTime: 1.5
   shooterTag: 
   explosion: {fileID: 100006, guid: 2e7e92bc7175b744ea40878dedfa79e4, type: 3}
 --- !u!82 &2582164557510520380

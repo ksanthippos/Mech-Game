@@ -110,11 +110,11 @@ MonoBehaviour:
   maxHealth: 100
   maxPower: 100
   maxHeat: 100
-  maxAmmo: 10
+  damageFlashTime: 0
+  heatCoolingRate: 0
   shieldsOn: 0
   explosion: {fileID: 95971568008635028, guid: 2445e0fb2e2c8cc44a401bd7b03d97ca, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
-  damageFlashTime: 0
 --- !u!82 &4642434581577410522
 AudioSource:
   m_ObjectHideFlags: 0
