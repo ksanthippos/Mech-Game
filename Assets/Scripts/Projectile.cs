@@ -60,7 +60,6 @@ public class Projectile : MonoBehaviour
         
         // projectiles are destroyed afterwards
         lifeTime -= Time.deltaTime;
-        
         if (lifeTime <= 0) 
             Destroy(gameObject);
         

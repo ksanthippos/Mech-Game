@@ -28,12 +28,13 @@ public class UIController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject respawnScreen;
     public GameObject endScreen;
-
+    
 
     private void Start()
     {
         toggleAutoCannon();
         shieldsOff();
+        
     }
 
     private void Update()

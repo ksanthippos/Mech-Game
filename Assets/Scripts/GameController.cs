@@ -6,19 +6,20 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 
-    public Spawner spawner;
+    
     public float score;
-    public int lives;
     public float scorePerTank;
+    public float volumeLevel;    // REAL MIXER INSTEAD OF THIS
+    public int lives;
     public int enemyStartingAmount;
     public int maxEnemiesAmount;
     public UIController ui;
     public AudioSource audioSource;
-    public float volumeLevel;    // REAL MIXER INSTEAD OF THIS
-
+    public Spawner spawner;
+    public GameObject forceField;
+    
     private int currentLives;
     private int currentEnemyAmount;
-    
     private GameObject player;
     private Health playerHealth;
     private PlayerControls playerControls;
@@ -45,13 +46,13 @@ public class GameController : MonoBehaviour
         score = 0f;
         currentLives = lives;
         currentEnemyAmount = enemyStartingAmount;
+        forceField = GameObject.FindWithTag("Force_Field");
+        forceField.SetActive(false);
 
         // set UI
         ui.setScore(score);
         ui.setMechs(currentLives, lives);
         
-        // spawning audio clip
-        audioSource.Play();
         // adjust master volume
         AudioListener.volume = volumeLevel;
     }
@@ -73,8 +74,9 @@ public class GameController : MonoBehaviour
                     player = spawner.SpawnPlayer();
                     playerHealth = player.GetComponent<Health>();
                     playerControls = player.GetComponent<PlayerControls>();
-                    audioSource.Play();
                     currentLives--;
+                    forceField = GameObject.FindWithTag("Force_Field");
+                    forceField.SetActive(false);
                     ui.toggleAutoCannon();
                     ui.setMechs(currentLives, lives);
                 }
@@ -111,11 +113,13 @@ public class GameController : MonoBehaviour
             {
                 playerHealth.shieldsOn = true;
                 ui.shieldsOn();
+                forceField.SetActive(true);
             }
             else
             {
                 playerHealth.shieldsOn = false;
                 ui.shieldsOff();
+                forceField.SetActive(false);
             }
         }
         
@@ -124,6 +128,13 @@ public class GameController : MonoBehaviour
         {
             playerHealth.AddHeat(-playerHealth.heatCoolingRate * Time.deltaTime);    
             SetHeat(playerHealth.GetCurrentHeat(), playerHealth.maxHeat);
+        }
+        
+        // shields being on drains power
+        if (playerHealth.GetCurrentPower() > 0 && playerHealth.shieldsOn)
+        {
+            playerHealth.ReducePower(playerHealth.heatCoolingRate * Time.deltaTime);    
+            SetPower(playerHealth.GetCurrentPower(), playerHealth.maxPower);
         }
     }
 
@@ -171,9 +182,17 @@ public class GameController : MonoBehaviour
     {
         playerHealth.shieldsOn = value;
         if (value)
+        {
             ui.shieldsOn();
+            forceField.SetActive(true);
+        }
+            
         else
+        {
             ui.shieldsOff();
+            forceField.SetActive(false);
+        }
+            
     }
 
     public bool CheckOkToShoot(PlayerControls.Weapon weapon)
