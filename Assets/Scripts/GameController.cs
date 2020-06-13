@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
         ui.setTime(time);
         ui.setMechs(currentLives, lives);
         
-        // adjust master volume
+        // for master volume
         AudioListener.volume = volumeLevel;
     }
     

@@ -351,7 +351,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'By: Mikael Rauhala'
+  m_Text: (c) Mikael Rauhala 2020
 --- !u!222 &400892169
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -685,7 +685,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Retro-Tank Destroyer
+  m_Text: Retro Mechs
 --- !u!222 &1626309572
 CanvasRenderer:
   m_ObjectHideFlags: 0

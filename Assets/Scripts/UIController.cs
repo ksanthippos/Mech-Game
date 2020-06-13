@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -22,6 +23,11 @@ public class UIController : MonoBehaviour
     public Text beamText;
     public Text shieldsText;
 
+    public GameObject healthBar;
+    public GameObject powerBar;
+    public GameObject heatBar;
+    public GameObject ammoBar;
+
     // end screen
     public Text EndScoreText;
     public Text endTimeText;
@@ -30,12 +36,21 @@ public class UIController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject respawnScreen;
     public GameObject endScreen;
-    
 
+    private Slider healthSlider;
+    private Slider powerSlider;
+    private Slider heatSlider;
+    private Slider ammoSlider;
+    
     private void Start()
     {
         toggleAutoCannon();
         shieldsOff();
+
+        healthSlider = healthBar.GetComponent<Slider>();
+        powerSlider = powerBar.GetComponent<Slider>();
+        heatSlider = heatBar.GetComponent<Slider>();
+        ammoSlider = ammoBar.GetComponent<Slider>();
     }
 
     private void Update()
@@ -45,6 +60,7 @@ public class UIController : MonoBehaviour
             togglePause();
         }
     }
+
 
     // HUD controls
     public void setScore(float score)
@@ -60,6 +76,8 @@ public class UIController : MonoBehaviour
     public void setHealth(float value)
     {
         healthText.text = "Health: " + (int) value + "%";
+        healthSlider.value = value;
+        
         if (value <= 25)
         {
             healthText.color = Color.red;
@@ -73,6 +91,8 @@ public class UIController : MonoBehaviour
     public void setPower(float value)
     {
         powerText.text = "Power: " + (int) value + "%";
+        powerSlider.value = value;
+        
         if (value <= 25)
         {
             powerText.color = Color.red;
@@ -86,6 +106,8 @@ public class UIController : MonoBehaviour
     public void setHeat(float value)
     {
         heatText.text = "Heat: " + (int) value + "%";
+        heatSlider.value = value;
+        
         if (value >= 75)
         {
             heatText.color = Color.red;
@@ -99,6 +121,8 @@ public class UIController : MonoBehaviour
     public void setAmmo(int value)
     {
         ammoText.text = "Ammo: " + value;
+        ammoSlider.value = value;
+        
         if (value < 2)
         {
             ammoText.color = Color.red;
@@ -124,7 +148,7 @@ public class UIController : MonoBehaviour
 
     public void toggleAutoCannon()
     {
-        autoCannonText.color = Color.white;
+        autoCannonText.color = Color.green;
         missilesText.color = Color.gray;
         beamText.color = Color.grey;
     }
@@ -132,7 +156,7 @@ public class UIController : MonoBehaviour
     public void toggleMissiles()
     {
         autoCannonText.color = Color.gray;
-        missilesText.color = Color.white;
+        missilesText.color = Color.green;
         beamText.color = Color.grey;
     }
 
@@ -140,18 +164,18 @@ public class UIController : MonoBehaviour
     {
         autoCannonText.color = Color.gray;
         missilesText.color = Color.gray;
-        beamText.color = Color.white;
+        beamText.color = Color.green;
     }
 
     public void shieldsOn()
     {
-        shieldsText.text = "Shields: ON";
+        shieldsText.text = "ON";
         shieldsText.color = Color.green;
     }
     
     public void shieldsOff()
     {
-        shieldsText.text = "Shields: OFF";
+        shieldsText.text = "OFF";
         shieldsText.color = Color.gray;
     }
     
