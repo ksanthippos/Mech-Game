@@ -224,6 +224,11 @@ public class GameController : MonoBehaviour
         return false;
     }
 
+    public GameObject getPlayer()
+    {
+        return player;
+    }
+
 
     
     
