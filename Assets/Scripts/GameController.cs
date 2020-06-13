@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
     
     public float score;
+    public float time;
     public float scorePerTank;
-    public float volumeLevel;    // REAL MIXER INSTEAD OF THIS
+    public float volumeLevel;    // REAL MIXER INSTEAD OF THIS??
     public int lives;
     public int enemyStartingAmount;
     public int maxEnemiesAmount;
@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour
         playerHealth = player.GetComponent<Health>();
         playerControls = player.GetComponent<PlayerControls>();
         score = 0f;
+        time = 0;
         currentLives = lives;
         currentEnemyAmount = enemyStartingAmount;
         forceField = GameObject.FindWithTag("Force_Field");
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour
 
         // set UI
         ui.setScore(score);
+        ui.setTime(time);
         ui.setMechs(currentLives, lives);
         
         // adjust master volume
@@ -60,6 +62,13 @@ public class GameController : MonoBehaviour
     void Update()
     {
         playerHealth.DeathCheck();    // first things first =)
+
+        // game timer
+        if (currentLives >= 0 && player != null)
+        {
+            time += Time.deltaTime;
+            ui.setTime((int) time);    
+        }
         
         if (player == null)    // player has died
         { 
@@ -84,7 +93,7 @@ public class GameController : MonoBehaviour
             else 
             {
                 // game over 
-                ui.ShowEndScreen(score);
+                ui.ShowEndScreen(score, time);
             }
         }
         

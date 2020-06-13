@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
 
     // HUD 
     public Text scoreText;
+    public Text timeText;
     public Text healthText;
     public Text mechsText;
     public Text heatText;
@@ -20,9 +21,10 @@ public class UIController : MonoBehaviour
     public Text missilesText;
     public Text beamText;
     public Text shieldsText;
-    
+
     // end screen
     public Text EndScoreText;
+    public Text endTimeText;
     
     // menus
     public GameObject pauseMenu;
@@ -34,7 +36,6 @@ public class UIController : MonoBehaviour
     {
         toggleAutoCannon();
         shieldsOff();
-        
     }
 
     private void Update()
@@ -49,6 +50,11 @@ public class UIController : MonoBehaviour
     public void setScore(float score)
     {
         scoreText.text = "Score: " + score;
+    }
+
+    public void setTime(float time)
+    {
+        timeText.text = "Time: " + time;
     }
 
     public void setHealth(float value)
@@ -168,15 +174,16 @@ public class UIController : MonoBehaviour
     {
         respawnScreen.SetActive(true);
     }
-    
+
     public void HideRespawnScreen()
     {
         respawnScreen.SetActive(false);
     }
 
-    public void ShowEndScreen(float score)
+    public void ShowEndScreen(float score, float time)
     {
-        EndScoreText.text = "Your score: " + score;
+        EndScoreText.text = "Total score: " + score + " points";
+        endTimeText.text = "Survived: " + (int) time + " seconds";
         endScreen.SetActive(true);
     }
 
