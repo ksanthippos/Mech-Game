@@ -41,6 +41,8 @@ public class UIController : MonoBehaviour
     private Slider powerSlider;
     private Slider heatSlider;
     private Slider ammoSlider;
+
+    public SoundManager soundManager;
     
     private void Start()
     {
@@ -51,6 +53,7 @@ public class UIController : MonoBehaviour
         powerSlider = powerBar.GetComponent<Slider>();
         heatSlider = heatBar.GetComponent<Slider>();
         ammoSlider = ammoBar.GetComponent<Slider>();
+        soundManager = GetComponent<SoundManager>();
     }
 
     private void Update()
@@ -151,6 +154,7 @@ public class UIController : MonoBehaviour
         autoCannonText.color = Color.green;
         missilesText.color = Color.gray;
         beamText.color = Color.grey;
+        soundManager.PlayWeaponsChange();
     }
 
     public void toggleMissiles()
@@ -158,6 +162,7 @@ public class UIController : MonoBehaviour
         autoCannonText.color = Color.gray;
         missilesText.color = Color.green;
         beamText.color = Color.grey;
+        soundManager.PlayWeaponsChange();
     }
 
     public void toggleBeam()
@@ -165,23 +170,28 @@ public class UIController : MonoBehaviour
         autoCannonText.color = Color.gray;
         missilesText.color = Color.gray;
         beamText.color = Color.green;
+        soundManager.PlayWeaponsChange();
     }
 
     public void shieldsOn()
     {
         shieldsText.text = "ON";
         shieldsText.color = Color.green;
+        soundManager.PlayShieldsUp();   
     }
     
     public void shieldsOff()
     {
         shieldsText.text = "OFF";
         shieldsText.color = Color.gray;
+        soundManager.PlayShieldsDown();
     }
     
 
     public void togglePause()
     {
+        soundManager.PlayPauseSound();
+        
         if (pauseMenu.activeInHierarchy)
         {
             pauseMenu.SetActive(false);

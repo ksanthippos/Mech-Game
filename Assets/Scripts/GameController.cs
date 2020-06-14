@@ -98,19 +98,19 @@ public class GameController : MonoBehaviour
         }
         
         // player controls
-        if (Input.GetButton("Autocannon"))    // button 1
+        if (Input.GetButtonDown("Autocannon"))    // button 1
         {
             playerControls.weapon = PlayerControls.Weapon.Autocannon;
             playerControls.weaponIndex = 0;
             ui.toggleAutoCannon();
         }
-        else if (Input.GetButton("Missiles"))    // button 2
+        else if (Input.GetButtonDown("Missiles"))    // button 2
         {
             playerControls.weapon = PlayerControls.Weapon.Missiles;
             playerControls.weaponIndex = 1;
             ui.toggleMissiles();
         }
-        else if (Input.GetButton("Energy beam"))    // button 3
+        else if (Input.GetButtonDown("Energy beam"))    // button 3
         {
             playerControls.weapon = PlayerControls.Weapon.Beam;
             playerControls.weaponIndex = 2;
