@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public int enemyStartingAmount;
     public int maxEnemiesAmount;
     public UIController ui;
-    public AudioSource audioSource;
+    //public AudioSource audioSource;
     public Spawner spawner;
     public GameObject forceField;
     
@@ -23,7 +23,8 @@ public class GameController : MonoBehaviour
     private GameObject player;
     private Health playerHealth;
     private PlayerControls playerControls;
-
+    private SoundManager soundManager;
+    
     public static GameController instance;
 
     private void Awake()
@@ -55,7 +56,8 @@ public class GameController : MonoBehaviour
         ui.setTime(time);
         ui.setMechs(currentLives, lives);
         
-        // for master volume
+        // audio
+        soundManager = SoundManager.instance;
         AudioListener.volume = volumeLevel;
     }
     
@@ -103,18 +105,21 @@ public class GameController : MonoBehaviour
             playerControls.weapon = PlayerControls.Weapon.Autocannon;
             playerControls.weaponIndex = 0;
             ui.toggleAutoCannon();
+            soundManager.PlaySound("WeaponChange");
         }
         else if (Input.GetButtonDown("Missiles"))    // button 2
         {
             playerControls.weapon = PlayerControls.Weapon.Missiles;
             playerControls.weaponIndex = 1;
             ui.toggleMissiles();
+            soundManager.PlaySound("WeaponChange");
         }
         else if (Input.GetButtonDown("Energy beam"))    // button 3
         {
             playerControls.weapon = PlayerControls.Weapon.Beam;
             playerControls.weaponIndex = 2;
             ui.toggleBeam();
+            soundManager.PlaySound("WeaponChange");
         }
         else if (Input.GetButtonDown("Shields"))    // button F
         {
@@ -123,12 +128,14 @@ public class GameController : MonoBehaviour
                 playerHealth.shieldsOn = true;
                 ui.shieldsOn();
                 forceField.SetActive(true);
+                soundManager.PlaySound("ShieldsOn");
             }
             else
             {
                 playerHealth.shieldsOn = false;
                 ui.shieldsOff();
                 forceField.SetActive(false);
+                soundManager.PlaySound("ShieldsOff");
             }
         }
         

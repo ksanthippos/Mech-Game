@@ -3,42 +3,65 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Sound
+{
+
+    public string name;
+    public AudioClip clip;
+    [Range(0f, 1f)]
+    public float volume;
+    
+    private AudioSource source;
+
+    public void SetSource(AudioSource _source)
+    {
+        source = _source;
+        source.clip = clip;
+    }
+
+    public void Play()
+    {
+        source.volume = volume;
+        source.Play();
+    }
+
+}
+
 public class SoundManager : MonoBehaviour
 {
-    private AudioSource[] audioSources;
 
-    private AudioSource weaponChange;
-    private AudioSource shieldsUp;
-    private AudioSource shieldsDown;
-    private AudioSource pauseSound;
+    public static SoundManager instance;
     
+    [SerializeField] 
+    private Sound[] sounds;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
-        audioSources = GetComponents<AudioSource>();
-        weaponChange = audioSources[0];
-        shieldsUp = audioSources[1];
-        shieldsDown = audioSources[2];
-        pauseSound = audioSources[3];
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            GameObject go = new GameObject("Sound_" + i + "_" + sounds[i].name);
+            sounds[i].SetSource(go.AddComponent<AudioSource>());
+        }
+    }
+
+    public void PlaySound(string _name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == _name)
+            {
+                sounds[i].Play();
+                return;
+            }
+        }
         
-    }
-
-    public void PlayWeaponsChange()
-    {
-        weaponChange.Play();
-    }
-
-    public void PlayShieldsUp()
-    {
-        shieldsUp.Play();
-    }
-
-    public void PlayShieldsDown()
-    {
-        shieldsDown.Play();
-    }
-
-    public void PlayPauseSound()
-    {
-        pauseSound.Play();
-    }
+        // no sound found
+        Debug.LogWarning("No sound found: " + _name);
+    } 
 }

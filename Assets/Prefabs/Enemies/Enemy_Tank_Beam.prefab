@@ -264,7 +264,7 @@ MonoBehaviour:
   turningSpeed: 2
   turretTurningSpeed: 3
   shootingCooldown: 2.5
-  detectRange: 12
+  detectRange: 25
   stoppingRange: 8
   switchTargetRange: 2
   switchDistance: 10
