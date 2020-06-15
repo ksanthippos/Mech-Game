@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
@@ -13,9 +15,22 @@ public class Spawner : MonoBehaviour
     public float spawnOffSet;
     
     public GameObject player;
-    public GameObject enemy;
+    public GameObject[] enemies;
     public Collider area;
-    
+
+    private GameController gameController;
+    private int level;
+
+    private void Start()
+    {
+        gameController = GameController.instance;
+        level = gameController.getLevel();
+    }
+
+    private void Update()
+    {
+        level = gameController.getLevel();
+    }
 
     public GameObject SpawnPlayer()
     {
@@ -24,7 +39,7 @@ public class Spawner : MonoBehaviour
 
     public GameObject SpawnEnemy()
     {
-        return Spawn(enemy);
+        return Spawn(enemies[level]);
     }
     
     private GameObject Spawn(GameObject obj)

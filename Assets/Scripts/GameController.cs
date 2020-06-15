@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
     
     private int currentLives;
     private int currentEnemyAmount;
+    private int enemiesDestroyed;
+    private int level;    
     private GameObject player;
     private Health playerHealth;
     private PlayerControls playerControls;
@@ -26,6 +28,17 @@ public class GameController : MonoBehaviour
     
     public static GameController instance;
 
+    // difficulty level?
+    /*
+     start level 0: sam turrets
+     level 1: missile tanks
+     (level 2: ac turrets)
+     level 3: beam tanks
+     
+     enemies to array, spawned via level number
+     on final level, enemies get spawned randomly from array --> EnemyDestroyed method activated
+     */
+    
     private void Awake()
     {
         instance = this;
@@ -153,21 +166,26 @@ public class GameController : MonoBehaviour
             SetPower(playerHealth.GetCurrentPower(), playerHealth.maxPower);
         }
     }
-
-    
-    // EDIT THIS
     
     public void EnemyDestroyed()
     {
         spawner.SpawnEnemy();
         score += scorePerTank;
+        enemiesDestroyed++;
         ui.setScore(score);
+
+        if (enemiesDestroyed >= enemyStartingAmount && level < 3)
+            level++;
+
+        Debug.Log("Level now: " + level);
         
+        /*
+        // TRIGGER HERE: ACTIVATES ONLY WHEN REACHED LEVEL 3
         if (currentEnemyAmount < maxEnemiesAmount)
         {
             spawner.SpawnEnemy();
             currentEnemyAmount++;
-        }
+        }*/
     }
 
     public void SetHealth(float current, float max)
@@ -252,6 +270,11 @@ public class GameController : MonoBehaviour
     public int getCurrentLives()
     {
         return currentLives;
+    }
+
+    public int getLevel()
+    {
+        return level;
     }
 
 
