@@ -58,7 +58,6 @@ public class GameController : MonoBehaviour
         // audio
         AudioListener.volume = volumeLevel;    // master volume
         soundManager = SoundManager.instance;
-        soundManager.PlaySound("WeaponChange");
     }
     
     void Update()

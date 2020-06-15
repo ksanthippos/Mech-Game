@@ -15,9 +15,8 @@ public class Spawner : MonoBehaviour
     public GameObject player;
     public GameObject enemy;
     public Collider area;
-
-    private GameController gameController;
     
+
     public GameObject SpawnPlayer()
     {
         return Spawn(player);
