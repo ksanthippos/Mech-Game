@@ -65,8 +65,7 @@ public class UIController : MonoBehaviour
             soundManager.PlaySound("PauseMenu");
         }
     }
-
-
+    
     // HUD controls
     public void setScore(float score)
     {

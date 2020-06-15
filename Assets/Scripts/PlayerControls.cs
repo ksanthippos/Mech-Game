@@ -79,6 +79,7 @@ public class PlayerControls : MonoBehaviour
         // moving forward: walk & run
         if (inputVertical > 0)
         {
+            
             // walk
             Vector3 movement = transform.forward * inputVertical * movementSpeed;
             rb.velocity = movement;

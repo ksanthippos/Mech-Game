@@ -9,12 +9,11 @@ public class GameController : MonoBehaviour
     public float score;
     public float time;
     public float scorePerTank;
-    public float volumeLevel;    // REAL MIXER INSTEAD OF THIS??
+    public float volumeLevel;    
     public int lives;
     public int enemyStartingAmount;
     public int maxEnemiesAmount;
     public UIController ui;
-    //public AudioSource audioSource;
     public Spawner spawner;
     public GameObject forceField;
     
@@ -57,8 +56,9 @@ public class GameController : MonoBehaviour
         ui.setMechs(currentLives, lives);
         
         // audio
+        AudioListener.volume = volumeLevel;    // master volume
         soundManager = SoundManager.instance;
-        AudioListener.volume = volumeLevel;
+        soundManager.PlaySound("WeaponChange");
     }
     
     void Update()
@@ -90,6 +90,7 @@ public class GameController : MonoBehaviour
                     forceField.SetActive(false);
                     ui.toggleAutoCannon();
                     ui.setMechs(currentLives, lives);
+                    soundManager.PlaySound("WeaponChange");
                 }
             }
             else 
@@ -154,6 +155,9 @@ public class GameController : MonoBehaviour
         }
     }
 
+    
+    // EDIT THIS
+    
     public void EnemyDestroyed()
     {
         spawner.SpawnEnemy();
@@ -237,6 +241,7 @@ public class GameController : MonoBehaviour
                 break;
         }
 
+        soundManager.PlaySound("EmptyClip");    // no ammo / cannot shoot
         return false;
     }
 
