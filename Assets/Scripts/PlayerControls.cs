@@ -25,7 +25,6 @@ public class PlayerControls : MonoBehaviour
     public List<GameObject> projectiles;
     public GameObject bulletFlash;
     public GameObject beamFlash;
-
     
     private Rigidbody rb;
     private Camera mainCamera;

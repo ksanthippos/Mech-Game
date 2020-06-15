@@ -250,6 +250,11 @@ public class GameController : MonoBehaviour
         return player;
     }
 
+    public int getCurrentLives()
+    {
+        return currentLives;
+    }
+
 
     
     

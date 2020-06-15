@@ -739,7 +739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245465153}
   m_LocalRotation: {x: -0.020730503, y: 0.70680285, z: 0.70680285, w: 0.020730503}
-  m_LocalPosition: {x: 96.3, y: 9.33, z: 25.7}
+  m_LocalPosition: {x: 96.3, y: 9.33, z: 29.69}
   m_LocalScale: {x: 20, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 1425503835}
@@ -3608,11 +3608,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3077f0a77a600c741afd4a5b8450349c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerX: 40
+  playerZ: 40
   range: 3
   spawnHeight: 0.5
   spawnOffSet: 50
   player: {fileID: 2385377588228053580, guid: 5e473ee157f33614bb0bd44f6369bdfd, type: 3}
-  enemy: {fileID: 1987282871279552919, guid: 81b803b4e348d2f42ac7b715b19a3b0e, type: 3}
+  enemy: {fileID: 1987282871279552919, guid: 128dc7a142f04a04b803267ef3f3c166, type: 3}
   area: {fileID: 1976676922}
 --- !u!114 &1425503838
 MonoBehaviour:
@@ -3626,7 +3628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9166928349e543948810673f79b46e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 80
+  amount: 100
   minSize: 0.2
   maxSize: 0.3
   spawnOffSet: 50

@@ -5,6 +5,9 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
+    public float playerX;
+    public float playerZ;
+    
     public float range;
     public float spawnHeight;
     public float spawnOffSet;
@@ -12,8 +15,8 @@ public class Spawner : MonoBehaviour
     public GameObject player;
     public GameObject enemy;
     public Collider area;
-    
-    
+
+    private GameController gameController;
     
     public GameObject SpawnPlayer()
     {
@@ -27,15 +30,14 @@ public class Spawner : MonoBehaviour
     
     private GameObject Spawn(GameObject obj)
     {
-        // Vector3 minPoint = area.bounds.min;
+        
         Vector3 maxPoint = area.bounds.max;
 
+        // player and enemies spawn at random location
         float randomx = Random.Range(spawnOffSet, maxPoint.x - spawnOffSet);
         float randomz = Random.Range(spawnOffSet, maxPoint.z - spawnOffSet);
-        
-        // Former position y value: maxPoint.y + spawnHeight
-        
-        Vector3 position = new Vector3(randomx, 0.5f, randomz);
+    
+        Vector3 position = new Vector3(randomx, spawnHeight, randomz);
         Collider[] colliders = Physics.OverlapSphere(position, range);    // same technique in explosions
 
         for (int i = 0; i < colliders.Length; i++)
@@ -45,7 +47,7 @@ public class Spawner : MonoBehaviour
                 Destroy(colliders[i]);    // remove block if inside spawn range
             }
         }
-
+    
         GameObject newObj = Instantiate(obj, position, new Quaternion());
         return newObj;
         
