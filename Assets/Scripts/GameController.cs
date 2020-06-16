@@ -11,33 +11,27 @@ public class GameController : MonoBehaviour
     public float scorePerTank;
     public float volumeLevel;    
     public int lives;
+    // good values: start amount = 6, max amount = 10
     public int enemyStartingAmount;
     public int maxEnemiesAmount;
+    public int maxLevel;
+    public int destroyTreshold;
     public UIController ui;
     public Spawner spawner;
     public GameObject forceField;
     
+    private int enemiesDestroyed;
+    private int level;
+    
     private int currentLives;
     private int currentEnemyAmount;
-    private int enemiesDestroyed;
-    private int level;    
     private GameObject player;
     private Health playerHealth;
     private PlayerControls playerControls;
     private SoundManager soundManager;
     
     public static GameController instance;
-
-    // difficulty level?
-    /*
-     start level 0: sam turrets
-     level 1: missile tanks
-     (level 2: ac turrets)
-     level 3: beam tanks
-     
-     enemies to array, spawned via level number
-     on final level, enemies get spawned randomly from array --> EnemyDestroyed method activated
-     */
+    
     
     private void Awake()
     {
@@ -46,10 +40,10 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        // enemy spawns
+        // spawn enemies
         for (int i = 0; i < enemyStartingAmount; i++)
         {
-            spawner.SpawnEnemy();
+            spawner.SpawnEnemy(level, maxLevel);
         }
         
         // player spawn
@@ -169,23 +163,22 @@ public class GameController : MonoBehaviour
     
     public void EnemyDestroyed()
     {
-        spawner.SpawnEnemy();
-        score += scorePerTank;
         enemiesDestroyed++;
+        score += scorePerTank;
         ui.setScore(score);
+        spawner.SpawnEnemy(level, maxLevel);
 
-        if (enemiesDestroyed >= enemyStartingAmount && level < 3)
+        if (enemiesDestroyed >= destroyTreshold && level < maxLevel)
+        {
             level++;
-
-        Debug.Log("Level now: " + level);
+            enemiesDestroyed = 0;
+        }
         
-        /*
-        // TRIGGER HERE: ACTIVATES ONLY WHEN REACHED LEVEL 3
         if (currentEnemyAmount < maxEnemiesAmount)
         {
-            spawner.SpawnEnemy();
+            spawner.SpawnEnemy(level, maxLevel);    
             currentEnemyAmount++;
-        }*/
+        }
     }
 
     public void SetHealth(float current, float max)
@@ -271,14 +264,5 @@ public class GameController : MonoBehaviour
     {
         return currentLives;
     }
-
-    public int getLevel()
-    {
-        return level;
-    }
-
-
-    
-    
 
 }

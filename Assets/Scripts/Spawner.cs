@@ -6,9 +6,6 @@ using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
-
-    public float playerX;
-    public float playerZ;
     
     public float range;
     public float spawnHeight;
@@ -18,28 +15,23 @@ public class Spawner : MonoBehaviour
     public GameObject[] enemies;
     public Collider area;
 
-    private GameController gameController;
-    private int level;
-
-    private void Start()
-    {
-        gameController = GameController.instance;
-        level = gameController.getLevel();
-    }
-
-    private void Update()
-    {
-        level = gameController.getLevel();
-    }
 
     public GameObject SpawnPlayer()
     {
         return Spawn(player);
     }
 
-    public GameObject SpawnEnemy()
+    public GameObject SpawnEnemy(int level, int maxLevel)
     {
-        return Spawn(enemies[level]);
+        int randInt;
+        if (level < maxLevel)
+        {
+            randInt = Random.Range(level, enemies.Length - (maxLevel - level));
+            return Spawn(enemies[randInt]);
+        }
+        
+        randInt = Random.Range(0, enemies.Length);
+        return Spawn(enemies[randInt]);
     }
     
     private GameObject Spawn(GameObject obj)
