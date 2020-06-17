@@ -12,6 +12,8 @@ public class PlayerControls : MonoBehaviour
     }
     
     public float movementSpeed;
+    public float runningCoefficient;
+    public float reverseCoefficient;
     public float turningSpeed;
     public float turretTurningSpeed;
     public float shootingCooldown;
@@ -88,7 +90,7 @@ public class PlayerControls : MonoBehaviour
             // run
             if (Input.GetKey(KeyCode.LeftShift))  
             {
-                Vector3 movement2 = transform.forward * inputVertical * movementSpeed * 1.5f;
+                Vector3 movement2 = transform.forward * inputVertical * movementSpeed * runningCoefficient;
                 rb.velocity = movement2;
                 animator.SetBool("Run", true);
                 animator.SetBool("Walk", false);
@@ -102,7 +104,7 @@ public class PlayerControls : MonoBehaviour
         // moving backwards is 30% slower
         if (inputVertical < 0)
         {
-            Vector3 movement = transform.forward * inputVertical * (movementSpeed * 0.7f);
+            Vector3 movement = transform.forward * inputVertical * (movementSpeed * reverseCoefficient);
             rb.velocity = movement;
             animator.SetBool("Walk", true);
             animator.SetBool("Run", false);

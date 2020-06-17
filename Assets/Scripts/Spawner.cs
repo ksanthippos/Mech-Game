@@ -36,15 +36,15 @@ public class Spawner : MonoBehaviour
     
     private GameObject Spawn(GameObject obj)
     {
-        
         Vector3 maxPoint = area.bounds.max;
 
-        // player and enemies spawn at random location
+        // generate random position
         float randomx = Random.Range(spawnOffSet, maxPoint.x - spawnOffSet);
         float randomz = Random.Range(spawnOffSet, maxPoint.z - spawnOffSet);
-    
         Vector3 position = new Vector3(randomx, spawnHeight, randomz);
-        Collider[] colliders = Physics.OverlapSphere(position, range);    // same technique in explosions
+        
+        // search for other colliders within a range 
+        Collider[] colliders = Physics.OverlapSphere(position, range);    
 
         for (int i = 0; i < colliders.Length; i++)
         {
